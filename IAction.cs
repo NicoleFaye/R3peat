@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace R3peat
 {
-    public interface Action
+    public interface IAction
     {
         void Run();
     }

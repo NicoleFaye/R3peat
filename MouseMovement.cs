@@ -5,12 +5,12 @@ using WindowsInput;
 
 namespace R3peat
 {
-    class MouseMovement : Action
+    class MouseMovement : IAction
     {
 
         private InputSimulator Input;
         private List<MouseMovementStep> MouseMovementSteps;
-        private readonly ICoordinateConversion CoordinateConversion= new WPFCoordinateConversion();
+        private readonly ICoordinateConversion CoordinateConversion = new WPFCoordinateConversion();
         public void Run()
         {
             foreach (MouseMovementStep mouseMovementStep in this.MouseMovementSteps)
@@ -35,34 +35,25 @@ namespace R3peat
                 int finalDeltaX = deltaX * (int)AbsoluteXPixelStepSize;
                 int finalDeltaY = deltaY * (int)AbsoluteYPixelStepSize;
 
-                if (checkForOverflow(DestinationAbsoluteX, deltaX))
+                if (checkForOverflow(DestinationAbsoluteX, finalDeltaX))
                 {
-                    if (deltaX < 0)
-                    {
-                        DestinationAbsoluteX = 0;
-                    }
-                    else
-                    {
-                        DestinationAbsoluteX = ushort.MaxValue;
-                    }
+                    if (finalDeltaX < 0) DestinationAbsoluteX = 0;
+                    else DestinationAbsoluteX = ushort.MaxValue;
                 }
-                else {
-                    DestinationAbsoluteX = (ushort)((int)DestinationAbsoluteX+ deltaX);
+                else
+                {
+                    DestinationAbsoluteX = (ushort)((int)DestinationAbsoluteX + finalDeltaX);
                 }
 
-                if (checkForOverflow(DestinationAbsoluteY, deltaY)) { 
-                    if (deltaY < 0)
-                    {
-                        DestinationAbsoluteY = 0;
-                    }
-                    else
-                    {
-                        DestinationAbsoluteY = ushort.MaxValue;
-                    }
-                } else {
-                    DestinationAbsoluteY = (ushort)((int)DestinationAbsoluteY+ deltaY);
+                if (checkForOverflow(DestinationAbsoluteY, finalDeltaY))
+                {
+                    if (finalDeltaY < 0) DestinationAbsoluteY = 0;
+                    else DestinationAbsoluteY = ushort.MaxValue;
                 }
-
+                else
+                {
+                    DestinationAbsoluteY = (ushort)((int)DestinationAbsoluteY + finalDeltaY);
+                }
 
                 this.Input.Mouse.MoveMouseTo(DestinationAbsoluteX, DestinationAbsoluteY);
                 Thread.Sleep(mouseMovementStep.GetPauseMillisecondDuration());

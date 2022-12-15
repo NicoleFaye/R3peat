@@ -2,7 +2,7 @@
 
 namespace R3peat
 {
-    class Pause: Action
+    class Pause: IAction
     {
         private int Delay;
         public void Run() {
