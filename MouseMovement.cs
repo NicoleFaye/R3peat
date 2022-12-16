@@ -7,7 +7,7 @@ namespace R3peat
 {
     class MouseMovement : IAction
     {
-
+        private String Name;
         private InputSimulator Input;
         private List<MouseMovementStep> MouseMovementSteps;
         private readonly ICoordinateConversion CoordinateConversion = new WPFCoordinateConversion();
@@ -17,7 +17,6 @@ namespace R3peat
             {
                 ushort DestinationAbsoluteX = mouseMovementStep.GetDestinationAbsoluteX();
                 ushort DestinationAbsoluteY = mouseMovementStep.GetDestinationAbsoluteY();
-
 
                 int variance = mouseMovementStep.GetVariance();
                 if (variance > ushort.MaxValue) variance = ushort.MaxValue;
@@ -35,7 +34,7 @@ namespace R3peat
                 int finalDeltaX = deltaX * (int)AbsoluteXPixelStepSize;
                 int finalDeltaY = deltaY * (int)AbsoluteYPixelStepSize;
 
-                if (checkForOverflow(DestinationAbsoluteX, finalDeltaX))
+                if (CheckForOverflow(DestinationAbsoluteX, finalDeltaX))
                 {
                     if (finalDeltaX < 0) DestinationAbsoluteX = 0;
                     else DestinationAbsoluteX = ushort.MaxValue;
@@ -45,7 +44,7 @@ namespace R3peat
                     DestinationAbsoluteX = (ushort)((int)DestinationAbsoluteX + finalDeltaX);
                 }
 
-                if (checkForOverflow(DestinationAbsoluteY, finalDeltaY))
+                if (CheckForOverflow(DestinationAbsoluteY, finalDeltaY))
                 {
                     if (finalDeltaY < 0) DestinationAbsoluteY = 0;
                     else DestinationAbsoluteY = ushort.MaxValue;
@@ -59,13 +58,21 @@ namespace R3peat
                 Thread.Sleep(mouseMovementStep.GetPauseMillisecondDuration());
             }
         }
-        public MouseMovement(InputSimulator Input, List<MouseMovementStep> Steps)
+        public MouseMovement(InputSimulator Input,String Name, List<MouseMovementStep> Steps)
         {
+            this.Name = Name;
             this.Input = Input;
             this.MouseMovementSteps = Steps;
         }
 
-        private bool checkForOverflow(ushort startingValue, int delta)
+        public String GetName() {
+            return this.Name;
+        }
+        public void SetName(String newName) {
+            this.Name=newName;
+        }
+
+        private bool CheckForOverflow(ushort startingValue, int delta)
         {
             bool willOverflow = false;
             if (startingValue > 0 && delta > 0)
