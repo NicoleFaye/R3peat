@@ -9,5 +9,6 @@ namespace R3peat
     public interface IAction
     {
         void Run();
+        String GetName();
     }
 }
