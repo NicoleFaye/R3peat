@@ -1,4 +1,4 @@
-﻿<Window x:Class="R3peat.MainWindow"
+﻿<Window x:Class="R3peat.MacroEditorWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -22,7 +22,19 @@
                 <RowDefinition Height="26"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <ListBox x:Name="ActionList" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" d:ItemsSource="{d:SampleData ItemCount=5}"  />
+            <ListBox x:Name="ActionList" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" d:ItemsSource="{d:SampleData ItemCount=5}"  >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <!--" ColumnDefinition Width="100"/>-->
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding Name}" Grid.Column="0"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
             <Label Grid.Row="0" Content="Action List" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" />
         </Grid>
         <Grid Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1" Margin="0,0,0,0">
