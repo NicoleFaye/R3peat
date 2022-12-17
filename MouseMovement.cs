@@ -5,13 +5,14 @@ using WindowsInput;
 
 namespace R3peat
 {
-    class MouseMovement : IAction
+    class MouseMovement : Action
     {
         private String Name;
         private InputSimulator Input;
         private List<MouseMovementStep> MouseMovementSteps;
         private readonly ICoordinateConversion CoordinateConversion = new WPFCoordinateConversion();
-        public void Run()
+        
+        override public void Run()
         {
             foreach (MouseMovementStep mouseMovementStep in this.MouseMovementSteps)
             {
@@ -63,13 +64,6 @@ namespace R3peat
             this.Name = Name;
             this.Input = Input;
             this.MouseMovementSteps = Steps;
-        }
-
-        public String GetName() {
-            return this.Name;
-        }
-        public void SetName(String newName) {
-            this.Name=newName;
         }
 
         private bool CheckForOverflow(ushort startingValue, int delta)
