@@ -7,7 +7,6 @@ namespace R3peat
 {
     class MouseMovement : Action
     {
-        private String Name;
         private InputSimulator Input;
         private List<MouseMovementStep> MouseMovementSteps;
         private readonly ICoordinateConversion CoordinateConversion = new WPFCoordinateConversion();

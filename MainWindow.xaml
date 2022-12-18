@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:R3peat"
         mc:Ignorable="d"
         Title="Macro Editor" Height="450" Width="800" Background="#FFE2E2E2">
-    <Grid>
+    <Grid Margin="2,2,2,2">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -15,7 +15,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="24"/>
         </Grid.RowDefinitions>
         <Grid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,266,0">
             <Grid.RowDefinitions>
@@ -51,15 +51,27 @@
             </Grid.RowDefinitions>
             <Label Grid.Row="0" Content="Action Editor" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center"/>
         </Grid>
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="2" Margin="0,0,5,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="22"/>
                 <ColumnDefinition Width="22"/>
                 <ColumnDefinition Width="4"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="1" Content="-" HorizontalAlignment="right" Margin="0,0,0,0" VerticalAlignment="Top" Height="20" Width="20"/>
-            <Button Grid.Column="2" Content="+" HorizontalAlignment="right" Margin="0,0,0,0" VerticalAlignment="Top" Height="20" Width="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Grid Margin="0,0,5,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="45"/>
+                </Grid.ColumnDefinitions>
+                <ComboBox Name="NewActionTypeComboBox" Grid.Column="0" />
+                <Button Click="ChangeActionOrderSooner" Grid.Column="1" Content="Add" HorizontalAlignment="left" Margin="0,0,0,0" VerticalAlignment="Center" Height="20" Width="45"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            </Grid>
+            <Button Click="ChangeActionOrderLater" Grid.Column="1" Content="^" HorizontalAlignment="right" Margin="0,0,0,0" VerticalAlignment="Center" Height="20" Width="20">
+                <Button.RenderTransform>
+                    <RotateTransform CenterX="10" CenterY="10" Angle="180"/>
+                </Button.RenderTransform>
+            </Button>
+            <Button Click="ChangeActionOrderSooner" Grid.Column="2" Content="^" HorizontalAlignment="right" Margin="0,0,0,0" VerticalAlignment="Center" Height="20" Width="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         </Grid>
     </Grid>
 </Window>

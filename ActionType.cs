@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace R3peat
 {
-    public abstract class Action
+    public enum ActionType
     {
-        public string Name { get; set; }
-        public abstract void Run();
-
+        MouseMovement,
+        Pause,
     }
 }

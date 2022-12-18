@@ -82,6 +82,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ActionType.cs" />
     <Compile Include="ICoordinateConversion.cs" />
     <Compile Include="Pause.cs" />
     <Compile Include="WPFCoordinateConversion.cs" />

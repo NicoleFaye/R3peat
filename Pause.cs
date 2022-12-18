@@ -13,5 +13,10 @@ namespace R3peat
             this.Delay= milliseconds;
             this.Name = "";
         }
+        public Pause(int milliseconds,string Name)
+        {
+            this.Delay= milliseconds;
+            this.Name = Name;
+        }
     }
 }

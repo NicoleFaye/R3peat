@@ -8,9 +8,11 @@ namespace R3peat
         private List<MouseMovementStep> MouseMovementSteps;
         private InputSimulator Input;
         private string Name;
+        private int totalBuilt { get; set; }
         public void BuildMouseMovement() {
             this.MouseMovementSteps.Clear();
-            this.Name = "";
+            this.totalBuilt+=1;
+            this.Name = "Mouse Movement "+totalBuilt.ToString();
         }
         public void BuildMouseMovement(string Name) {
             this.MouseMovementSteps.Clear();
