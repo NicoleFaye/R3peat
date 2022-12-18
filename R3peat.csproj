@@ -84,6 +84,7 @@
     </Compile>
     <Compile Include="ActionType.cs" />
     <Compile Include="ICoordinateConversion.cs" />
+    <Compile Include="PauseBuilder.cs" />
     <Compile Include="Pause.cs" />
     <Compile Include="WPFCoordinateConversion.cs" />
     <Compile Include="MainWindow.xaml.cs">

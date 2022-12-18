@@ -64,7 +64,7 @@
                     <ColumnDefinition Width="45"/>
                 </Grid.ColumnDefinitions>
                 <ComboBox Name="NewActionTypeComboBox" Grid.Column="0" />
-                <Button Click="ChangeActionOrderSooner" Grid.Column="1" Content="Add" HorizontalAlignment="left" Margin="0,0,0,0" VerticalAlignment="Center" Height="20" Width="45"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <Button Click="AddNewAction" Grid.Column="1" Content="Add" HorizontalAlignment="left" Margin="0,0,0,0" VerticalAlignment="Center" Height="20" Width="45"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             </Grid>
             <Button Click="ChangeActionOrderLater" Grid.Column="1" Content="^" HorizontalAlignment="right" Margin="0,0,0,0" VerticalAlignment="Center" Height="20" Width="20">
                 <Button.RenderTransform>

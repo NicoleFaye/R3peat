@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WindowsInput;
 
 namespace R3peat
 {
@@ -22,23 +23,22 @@ namespace R3peat
     public partial class MacroEditorWindow : Window
     {
         public ObservableCollection<Action> actions = new ObservableCollection<Action>();
+        private InputSimulator input = new InputSimulator();
+        private MouseMovementBuilder MouseMovementBuilder;
+        private PauseBuilder PauseBuilder;
         public MacroEditorWindow()
         {
             InitializeComponent();
-            actions.Add(new Pause(2, "jim"));
-            actions.Add(new Pause(2, "j3www34im"));
             ActionList.ItemsSource = actions;
             NewActionTypeComboBox.ItemsSource = Enum.GetValues(typeof(ActionType));
-            actions.Add(new Pause(2, "j3www28937498234im"));
-            actions.Add(new Pause(2, "j3www3982734982374im"));
-            actions.Add(new Pause(2, "234723984723984j3www34im"));
-            actions.Add(new Pause(2, "j3www34872938479im"));
+            MouseMovementBuilder= new MouseMovementBuilder(input);
+            PauseBuilder = new PauseBuilder();
 
         }
         private void ChangeActionOrderSooner(object sender, RoutedEventArgs e)
         {
             int currentIndex = ActionList.SelectedIndex;
-            if (currentIndex == 0)
+            if (currentIndex <= 0)
             {
                 return;
             }
@@ -59,13 +59,15 @@ namespace R3peat
         }
         private void AddNewAction(object sender, RoutedEventArgs e)
         {
-            switch (ActionList.SelectedItem)
+            switch (NewActionTypeComboBox.SelectedItem)
             {
                 case ActionType.Pause:
-
+                    PauseBuilder.BuildPause();
+                    actions.Add(PauseBuilder.GetPause());
                     break;
                 case ActionType.MouseMovement:
-
+                    MouseMovementBuilder.BuildMouseMovement();
+                    actions.Add(MouseMovementBuilder.GetMouseMovement());
                     break;
                 default:
                     break;
