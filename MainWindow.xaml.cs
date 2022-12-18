@@ -45,6 +45,7 @@ namespace R3peat
             Action swap = actions[currentIndex - 1];
             actions[currentIndex - 1] = actions[currentIndex];
             actions[currentIndex] = swap;
+            ActionList.SelectedIndex= currentIndex-1;
         }
         private void ChangeActionOrderLater(object sender, RoutedEventArgs e)
         {
@@ -56,6 +57,7 @@ namespace R3peat
             Action swap = actions[currentIndex + 1];
             actions[currentIndex + 1] = actions[currentIndex];
             actions[currentIndex] = swap;
+            ActionList.SelectedIndex= currentIndex+1;
         }
         private void AddNewAction(object sender, RoutedEventArgs e)
         {
