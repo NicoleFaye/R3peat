@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,12 +27,16 @@ namespace R3peat
         private InputSimulator input = new InputSimulator();
         private MouseMovementBuilder MouseMovementBuilder;
         private PauseBuilder PauseBuilder;
+
+
+
+
         public MacroEditorWindow()
         {
             InitializeComponent();
             ActionList.ItemsSource = actions;
             NewActionTypeComboBox.ItemsSource = Enum.GetValues(typeof(ActionType));
-            MouseMovementBuilder= new MouseMovementBuilder(input);
+            MouseMovementBuilder = new MouseMovementBuilder(input);
             PauseBuilder = new PauseBuilder();
 
         }
@@ -45,7 +50,7 @@ namespace R3peat
             Action swap = actions[currentIndex - 1];
             actions[currentIndex - 1] = actions[currentIndex];
             actions[currentIndex] = swap;
-            ActionList.SelectedIndex= currentIndex-1;
+            ActionList.SelectedIndex = currentIndex - 1;
         }
         private void ChangeActionOrderLater(object sender, RoutedEventArgs e)
         {
@@ -57,7 +62,7 @@ namespace R3peat
             Action swap = actions[currentIndex + 1];
             actions[currentIndex + 1] = actions[currentIndex];
             actions[currentIndex] = swap;
-            ActionList.SelectedIndex= currentIndex+1;
+            ActionList.SelectedIndex = currentIndex + 1;
         }
         private void AddNewAction(object sender, RoutedEventArgs e)
         {
@@ -74,6 +79,12 @@ namespace R3peat
                 default:
                     break;
             }
+        }
+        private bool SelectedActionIsMouseMovement(object sender, RoutedEventArgs e)
+        {
+            if (ActionList.SelectedItem.GetType() == typeof(MouseMovement)) return true;
+            ActionList.SelectedItem.
+            return false;
         }
     }
 }

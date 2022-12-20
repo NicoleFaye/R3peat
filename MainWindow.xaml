@@ -37,20 +37,6 @@
             </ListBox>
             <Label Grid.Row="0" Content="Action List" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" />
         </Grid>
-        <Grid Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1" Margin="0,0,0,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="26"/>
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
-            <Label Grid.Row="0" Content="Action Editor" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center"/>
-        </Grid>
-        <Grid Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="1" Margin="0,0,0,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="26"/>
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
-            <Label Grid.Row="0" Content="Action Editor" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center"/>
-        </Grid>
         <Grid Grid.Row="2" Margin="0,0,5,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -73,5 +59,52 @@
             </Button>
             <Button Click="ChangeActionOrderSooner" Grid.Column="2" Content="^" HorizontalAlignment="right" Margin="0,0,0,0" VerticalAlignment="Center" Height="20" Width="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         </Grid>
+        
+        <Grid Name="MouseMovementEditorGrid" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Visibility="{Binding MouseMovementEditorGridVisibility}">
+            <!--Grid.Style>
+                <Style TargetType="Grid">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=ActionList, Path=SelectedItem}" Value="">
+                            
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="26"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="26"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="2" Content="Mouse Movement Step List" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="1"/>
+            <ListBox x:Name="MouseMovementStepList" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Stretch" d:ItemsSource="{d:SampleData ItemCount=5}"  >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <!--" ColumnDefinition Width="100"/>-->
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding Name}" Grid.Column="0"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Label Grid.Row="0" Content="Mouse Movement Editor" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
+            <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+            </Grid>
+        </Grid>
+        
     </Grid>
 </Window>
