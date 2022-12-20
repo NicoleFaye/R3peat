@@ -47,6 +47,10 @@ namespace R3peat
         }
         public void ChangeActionOrderLater(int currentIndex)
         {
+            if (currentIndex + 1 >=actions.Count)
+            {
+                return;
+            }
             Action swap = actions[currentIndex + 1];
             actions[currentIndex + 1] = actions[currentIndex];
             actions[currentIndex] = swap;

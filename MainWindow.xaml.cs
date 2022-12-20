@@ -37,26 +37,18 @@ namespace R3peat
         private void ChangeActionOrderSooner(object sender, RoutedEventArgs e)
         {
             int currentIndex = ActionList.SelectedIndex;
-            if (currentIndex <= 0)
-            {
-                return;
-            }
             MacroEditorModel.ChangeActionOrderSooner(currentIndex);
             ActionList.SelectedIndex = currentIndex - 1;
         }
         private void ChangeActionOrderLater(object sender, RoutedEventArgs e)
         {
             int currentIndex = ActionList.SelectedIndex;
-            if (currentIndex + 1 >= ActionList.Items.Count)
-            {
-                return;
-            }
             MacroEditorModel.ChangeActionOrderLater(currentIndex);
             ActionList.SelectedIndex = currentIndex + 1;
         }
         private void AddNewAction(object sender, RoutedEventArgs e)
         {
-            MacroEditorModel.AddNewAction((ActionType)ActionList.SelectedItem);
+            MacroEditorModel.AddNewAction((ActionType)NewActionTypeComboBox.SelectedItem);
         }
 
         //not sure if needed yet
