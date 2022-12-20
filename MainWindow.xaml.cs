@@ -23,21 +23,15 @@ namespace R3peat
     /// </summary>
     public partial class MacroEditorWindow : Window
     {
-        public ObservableCollection<Action> actions = new ObservableCollection<Action>();
-        private InputSimulator input = new InputSimulator();
-        private MouseMovementBuilder MouseMovementBuilder;
-        private PauseBuilder PauseBuilder;
-
+        MacroEditorModel MacroEditorModel=new MacroEditorModel();
 
 
 
         public MacroEditorWindow()
         {
             InitializeComponent();
-            ActionList.ItemsSource = actions;
+            ActionList.ItemsSource = MacroEditorModel.actions;
             NewActionTypeComboBox.ItemsSource = Enum.GetValues(typeof(ActionType));
-            MouseMovementBuilder = new MouseMovementBuilder(input);
-            PauseBuilder = new PauseBuilder();
 
         }
         private void ChangeActionOrderSooner(object sender, RoutedEventArgs e)
@@ -47,9 +41,7 @@ namespace R3peat
             {
                 return;
             }
-            Action swap = actions[currentIndex - 1];
-            actions[currentIndex - 1] = actions[currentIndex];
-            actions[currentIndex] = swap;
+            MacroEditorModel.ChangeActionOrderSooner(currentIndex);
             ActionList.SelectedIndex = currentIndex - 1;
         }
         private void ChangeActionOrderLater(object sender, RoutedEventArgs e)
@@ -59,31 +51,18 @@ namespace R3peat
             {
                 return;
             }
-            Action swap = actions[currentIndex + 1];
-            actions[currentIndex + 1] = actions[currentIndex];
-            actions[currentIndex] = swap;
+            MacroEditorModel.ChangeActionOrderLater(currentIndex);
             ActionList.SelectedIndex = currentIndex + 1;
         }
         private void AddNewAction(object sender, RoutedEventArgs e)
         {
-            switch (NewActionTypeComboBox.SelectedItem)
-            {
-                case ActionType.Pause:
-                    PauseBuilder.BuildPause();
-                    actions.Add(PauseBuilder.GetPause());
-                    break;
-                case ActionType.MouseMovement:
-                    MouseMovementBuilder.BuildMouseMovement();
-                    actions.Add(MouseMovementBuilder.GetMouseMovement());
-                    break;
-                default:
-                    break;
-            }
+            MacroEditorModel.AddNewAction((ActionType)ActionList.SelectedItem);
         }
+
+        //not sure if needed yet
         private bool SelectedActionIsMouseMovement(object sender, RoutedEventArgs e)
         {
             if (ActionList.SelectedItem.GetType() == typeof(MouseMovement)) return true;
-            ActionList.SelectedItem.
             return false;
         }
     }
