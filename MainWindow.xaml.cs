@@ -23,7 +23,7 @@ namespace R3peat
     /// </summary>
     public partial class MacroEditorWindow : Window
     {
-        MacroEditorModel MacroEditorModel=new MacroEditorModel();
+        public MacroEditorModel MacroEditorModel=new MacroEditorModel();
 
 
 
@@ -33,6 +33,13 @@ namespace R3peat
             ActionList.ItemsSource = MacroEditorModel.actions;
             NewActionTypeComboBox.ItemsSource = Enum.GetValues(typeof(ActionType));
 
+            //Comment out to disable grid
+            MacroEditorModel.MouseMovementEditorGridVisible=Visibility.Visible;
+            
+            //sets up binding for MouseMovementEditorGrid visibility 
+            Binding binding = new Binding("MouseMovementEditorGridVisible");
+            binding.Source = MacroEditorModel;
+            MouseMovementEditorGrid.SetBinding(Grid.VisibilityProperty,binding);
         }
         private void ChangeActionOrderSooner(object sender, RoutedEventArgs e)
         {

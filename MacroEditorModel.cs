@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using WindowsInput;
+using System.Windows;
 
 namespace R3peat
 {
@@ -17,6 +18,21 @@ namespace R3peat
         private InputSimulator input = new InputSimulator();
         private MouseMovementBuilder MouseMovementBuilder;
         private PauseBuilder PauseBuilder;
+        private Visibility mouseMovementEditorGridVisible = Visibility.Hidden;
+
+        public Visibility MouseMovementEditorGridVisible 
+        {
+            get
+            {
+                return mouseMovementEditorGridVisible;
+            }
+
+            set
+            {
+                mouseMovementEditorGridVisible = value;
+                NotifyPropertyChanged("MouseMovementEditorGridVisible");
+            }
+        }
         private void NotifyPropertyChanged(string info)
         {
             if (PropertyChanged != null)
@@ -57,6 +73,10 @@ namespace R3peat
         }
         public void ChangeActionOrderSooner(int currentIndex)
         {
+            if (currentIndex <= 0)
+            {
+                return;
+            }
             Action swap = actions[currentIndex - 1];
             actions[currentIndex - 1] = actions[currentIndex];
             actions[currentIndex] = swap;

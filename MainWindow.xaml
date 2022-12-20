@@ -60,7 +60,7 @@
             <Button Click="ChangeActionOrderSooner" Grid.Column="2" Content="^" HorizontalAlignment="right" Margin="0,0,0,0" VerticalAlignment="Center" Height="20" Width="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         </Grid>
         
-        <Grid Name="MouseMovementEditorGrid" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Visibility="{Binding MouseMovementEditorGridVisibility}">
+        <Grid Name="MouseMovementEditorGrid" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Visibility="{Binding Path=Model}">
             <!--Grid.Style>
                 <Style TargetType="Grid">
                     <Style.Triggers>
