@@ -83,6 +83,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ActionType.cs" />
+    <Compile Include="MacroEditorModel.cs" />
     <Compile Include="ICoordinateConversion.cs" />
     <Compile Include="PauseBuilder.cs" />
     <Compile Include="Pause.cs" />
