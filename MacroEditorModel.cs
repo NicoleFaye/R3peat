@@ -18,19 +18,18 @@ namespace R3peat
         private InputSimulator input = new InputSimulator();
         private MouseMovementBuilder MouseMovementBuilder;
         private PauseBuilder PauseBuilder;
-        private Visibility mouseMovementEditorGridVisible = Visibility.Hidden;
+        private Visibility mouseMovementEditorGridVisibility;
 
-        public Visibility MouseMovementEditorGridVisible 
+        public Visibility MouseMovementEditorGridVisibility
         {
             get
             {
-                return mouseMovementEditorGridVisible;
+                return mouseMovementEditorGridVisibility;
             }
-
             set
             {
-                mouseMovementEditorGridVisible = value;
-                NotifyPropertyChanged("MouseMovementEditorGridVisible");
+                mouseMovementEditorGridVisibility = value;
+                NotifyPropertyChanged("MouseMovementEditorGridVisibility");
             }
         }
         private void NotifyPropertyChanged(string info)
@@ -41,12 +40,27 @@ namespace R3peat
             }
         }
 
-        public MacroEditorModel() {
+        public MacroEditorModel()
+        {
             MouseMovementBuilder = new MouseMovementBuilder(input);
             PauseBuilder = new PauseBuilder();
+            MouseMovementEditorGridVisibility = Visibility.Hidden;
         }
 
-        public void AddNewAction(ActionType type) {
+        public void SelectedActionChanged(Action CurrentAction)
+        {
+            if (CurrentAction.GetType() == typeof(MouseMovement))
+            {
+                MouseMovementEditorGridVisibility = Visibility.Visible;
+            }
+            else
+            {
+                MouseMovementEditorGridVisibility = Visibility.Hidden;
+            }
+        }
+
+        public void AddNewAction(ActionType type)
+        {
             switch (type)
             {
                 case ActionType.Pause:
@@ -63,7 +77,7 @@ namespace R3peat
         }
         public void ChangeActionOrderLater(int currentIndex)
         {
-            if (currentIndex + 1 >=actions.Count)
+            if (currentIndex + 1 >= actions.Count)
             {
                 return;
             }

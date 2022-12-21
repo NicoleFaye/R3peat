@@ -23,7 +23,7 @@ namespace R3peat
     /// </summary>
     public partial class MacroEditorWindow : Window
     {
-        public MacroEditorModel MacroEditorModel=new MacroEditorModel();
+        public MacroEditorModel MacroEditorModel = new MacroEditorModel();
 
 
 
@@ -33,13 +33,11 @@ namespace R3peat
             ActionList.ItemsSource = MacroEditorModel.actions;
             NewActionTypeComboBox.ItemsSource = Enum.GetValues(typeof(ActionType));
 
-            //Comment out to disable grid
-            MacroEditorModel.MouseMovementEditorGridVisible=Visibility.Visible;
-            
+
             //sets up binding for MouseMovementEditorGrid visibility 
-            Binding binding = new Binding("MouseMovementEditorGridVisible");
+            Binding binding = new Binding("MouseMovementEditorGridVisibility");
             binding.Source = MacroEditorModel;
-            MouseMovementEditorGrid.SetBinding(Grid.VisibilityProperty,binding);
+            MouseMovementEditorGrid.SetBinding(Grid.VisibilityProperty, binding);
         }
         private void ChangeActionOrderSooner(object sender, RoutedEventArgs e)
         {
@@ -55,14 +53,15 @@ namespace R3peat
         }
         private void AddNewAction(object sender, RoutedEventArgs e)
         {
+            if (NewActionTypeComboBox.SelectedIndex < 0) return;
             MacroEditorModel.AddNewAction((ActionType)NewActionTypeComboBox.SelectedItem);
         }
 
-        //not sure if needed yet
-        private bool SelectedActionIsMouseMovement(object sender, RoutedEventArgs e)
+
+        public void OnActionListSelectionChange(object sender, SelectionChangedEventArgs e)
         {
-            if (ActionList.SelectedItem.GetType() == typeof(MouseMovement)) return true;
-            return false;
+            MacroEditorModel.SelectedActionChanged((Action)ActionList.SelectedItem);
         }
+
     }
 }

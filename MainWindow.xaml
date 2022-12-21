@@ -22,7 +22,7 @@
                 <RowDefinition Height="26"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <ListBox x:Name="ActionList" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" d:ItemsSource="{d:SampleData ItemCount=5}"  >
+            <ListBox x:Name="ActionList" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="OnActionListSelectionChange" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="0,2">
@@ -60,7 +60,7 @@
             <Button Click="ChangeActionOrderSooner" Grid.Column="2" Content="^" HorizontalAlignment="right" Margin="0,0,0,0" VerticalAlignment="Center" Height="20" Width="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         </Grid>
         
-        <Grid Name="MouseMovementEditorGrid" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Visibility="{Binding Path=Model}">
+        <Grid Name="MouseMovementEditorGrid" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Visibility="Hidden" >
             <!--Grid.Style>
                 <Style TargetType="Grid">
                     <Style.Triggers>
