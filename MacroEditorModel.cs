@@ -19,7 +19,6 @@ namespace R3peat
         private MouseMovementBuilder MouseMovementBuilder;
         private PauseBuilder PauseBuilder;
         private Visibility mouseMovementEditorGridVisibility;
-
         public Visibility MouseMovementEditorGridVisibility
         {
             get
@@ -30,6 +29,19 @@ namespace R3peat
             {
                 mouseMovementEditorGridVisibility = value;
                 NotifyPropertyChanged("MouseMovementEditorGridVisibility");
+            }
+        }
+        private Visibility pauseEditorGridVisibility;
+        public Visibility PauseEditorGridVisibility
+        {
+            get
+            {
+                return pauseEditorGridVisibility;
+            }
+            set
+            {
+                pauseEditorGridVisibility= value;
+                NotifyPropertyChanged("PauseEditorGridVisibility");
             }
         }
         private void NotifyPropertyChanged(string info)
@@ -45,10 +57,19 @@ namespace R3peat
             MouseMovementBuilder = new MouseMovementBuilder(input);
             PauseBuilder = new PauseBuilder();
             MouseMovementEditorGridVisibility = Visibility.Hidden;
+            PauseEditorGridVisibility = Visibility.Hidden;
         }
 
         public void SelectedActionChanged(Action CurrentAction)
         {
+            if (CurrentAction.GetType() == typeof(Pause))
+            {
+                PauseEditorGridVisibility= Visibility.Visible;
+            }
+            else
+            {
+                PauseEditorGridVisibility= Visibility.Hidden;
+            }
             if (CurrentAction.GetType() == typeof(MouseMovement))
             {
                 MouseMovementEditorGridVisibility = Visibility.Visible;

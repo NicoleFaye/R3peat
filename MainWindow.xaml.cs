@@ -34,10 +34,15 @@ namespace R3peat
             NewActionTypeComboBox.ItemsSource = Enum.GetValues(typeof(ActionType));
 
 
+            //sets up binding for PauseEditorGrid visibility 
+            Binding PauseEditorVisibilityBinding = new Binding("PauseEditorGridVisibility");
+            PauseEditorVisibilityBinding.Source = MacroEditorModel;
+            PauseEditorGrid.SetBinding(Grid.VisibilityProperty, PauseEditorVisibilityBinding);
+
             //sets up binding for MouseMovementEditorGrid visibility 
-            Binding binding = new Binding("MouseMovementEditorGridVisibility");
-            binding.Source = MacroEditorModel;
-            MouseMovementEditorGrid.SetBinding(Grid.VisibilityProperty, binding);
+            Binding MouseMovementVisibilityBinding = new Binding("MouseMovementEditorGridVisibility");
+            MouseMovementVisibilityBinding.Source = MacroEditorModel;
+            MouseMovementEditorGrid.SetBinding(Grid.VisibilityProperty, MouseMovementVisibilityBinding);
         }
         private void ChangeActionOrderSooner(object sender, RoutedEventArgs e)
         {
