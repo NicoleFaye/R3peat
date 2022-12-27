@@ -21,13 +21,13 @@ namespace R3peat
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MacroEditorWindow : Window
+    public partial class MacroEditorWindowOld : Window
     {
         public MacroEditorModel MacroEditorModel = new MacroEditorModel();
 
 
 
-        public MacroEditorWindow()
+        public MacroEditorWindowOld()
         {
             InitializeComponent();
             ActionList.ItemsSource = MacroEditorModel.actions;

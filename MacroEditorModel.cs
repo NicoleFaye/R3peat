@@ -62,6 +62,8 @@ namespace R3peat
 
         public void SelectedActionChanged(Action CurrentAction)
         {
+            if (CurrentAction == null) return;
+
             if (CurrentAction.GetType() == typeof(Pause))
             {
                 PauseEditorGridVisibility= Visibility.Visible;
