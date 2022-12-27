@@ -10,8 +10,6 @@
                 <ui:ThemeResources />
                 <ui:XamlControlsResources />
                 <ui:IntellisenseResources/>
-                <ui:ResourceDictionaryEx/>
-
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
