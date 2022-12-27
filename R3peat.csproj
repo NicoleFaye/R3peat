@@ -70,7 +70,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
+    <Page Include="MacroEditorWindowOld.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -84,15 +84,15 @@
     <Compile Include="ICoordinateConversion.cs" />
     <Compile Include="PauseBuilder.cs" />
     <Compile Include="Pause.cs" />
-    <Compile Include="Window1.xaml.cs">
-      <DependentUpon>Window1.xaml</DependentUpon>
+    <Compile Include="MacroEditorWindow.xaml.cs">
+      <DependentUpon>MacroEditorWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPFCoordinateConversion.cs" />
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="MacroEditorWindowOld.xaml.cs">
+      <DependentUpon>MacroEditorWindowOld.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Window1.xaml">
+    <Page Include="MacroEditorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
