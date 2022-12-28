@@ -30,12 +30,12 @@ namespace R3peat
             //sets up binding for PauseEditorGrid visibility 
             Binding PauseEditorVisibilityBinding = new Binding("PauseEditorGridVisibility");
             PauseEditorVisibilityBinding.Source = MacroEditorModel;
-            //PauseEditorGrid.SetBinding(Grid.VisibilityProperty, PauseEditorVisibilityBinding);
+            PauseEditorGrid.SetBinding(Grid.VisibilityProperty, PauseEditorVisibilityBinding);
 
             //sets up binding for MouseMovementEditorGrid visibility 
             Binding MouseMovementVisibilityBinding = new Binding("MouseMovementEditorGridVisibility");
             MouseMovementVisibilityBinding.Source = MacroEditorModel;
-            //MouseMovementEditorGrid.SetBinding(Grid.VisibilityProperty, MouseMovementVisibilityBinding);
+            MouseMovementEditorGrid.SetBinding(Grid.VisibilityProperty, MouseMovementVisibilityBinding);
         }
         private void ChangeActionOrderSooner(object sender, RoutedEventArgs e)
         {

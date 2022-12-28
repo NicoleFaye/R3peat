@@ -80,6 +80,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ActionType.cs" />
+    <Page Include="DesignTimeResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Compile Include="MacroEditorModel.cs" />
     <Compile Include="ICoordinateConversion.cs" />
     <Compile Include="PauseBuilder.cs" />

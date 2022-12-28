@@ -45,5 +45,71 @@
                 <Button Click="ChangeActionOrderSooner" Grid.Column="3" Content="▲" FontSize="14"  HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch" />
             </Grid>
         </Grid>
+        <Grid Name="PauseEditorGrid" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Visibility="Hidden" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Content="Pause Editor" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="4"/>
+            <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+            </Grid>
+            <Label Content="Duration:" HorizontalAlignment="Right" Margin="0,0,10,0" Grid.Row="2" VerticalAlignment="Center"/>
+            <TextBox Name="PauseDurationTextBox" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,0,0,0" Grid.Row="2" TextWrapping="Wrap" Text="" VerticalAlignment="Center" />
+        </Grid>
+        
+        
+        <Grid Name="MouseMovementEditorGrid" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Visibility="Visible" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="36"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="36"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="36"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="2" Content="Mouse Movement Step List" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="1"/>
+            <ListBox x:Name="MouseMovementStepList" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Stretch" d:ItemsSource="{d:SampleData ItemCount=5}"  >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <!--" ColumnDefinition Width="100"/>-->
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding Name}" Grid.Column="0"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Label Grid.Row="0" Content="Mouse Movement Editor" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
+            <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>
