@@ -19,6 +19,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="35"/>
             </Grid.RowDefinitions>
+            <Label Content="Action List" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <ListBox x:Name="ActionList" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="OnActionListSelectionChange" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -80,11 +81,11 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="36"/>
+                <RowDefinition Height="35"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="36"/>
+                <RowDefinition Height="35"/>
                 <RowDefinition Height="2*"/>
-                <RowDefinition Height="36"/>
+                <RowDefinition Height="35"/>
             </Grid.RowDefinitions>
 
             <Label Grid.Row="2" Content="Mouse Movement Step List" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="1"/>
@@ -101,7 +102,8 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Label Grid.Row="0" Content="Mouse Movement Editor" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
+            
+            <Label Grid.Row="0" Grid.Column="1" Content="Mouse Movement Editor" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" />
             <Grid Grid.Row="1" Grid.ColumnSpan="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -109,6 +111,28 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
+            </Grid>
+            <Grid Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Click="AddNewMouseMovementStep" Grid.Column="0" Content="Add" HorizontalAlignment="Stretch" FontWeight="DemiBold" Margin="0,0,0,0" VerticalAlignment="Stretch"   />
+                <Button Click="ChangeMouseMovementStepOrderLater" Grid.Column="1" Content="▼" FontSize="14" Margin="0,0,0,0" VerticalAlignment="Stretch"  HorizontalAlignment="Stretch" />
+                <Button Click="ChangeMouseMovementStepOrderSooner" Grid.Column="2" Content="▲" FontSize="14"  HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch" />
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
             </Grid>
         </Grid>
     </Grid>
