@@ -27,12 +27,12 @@ namespace R3peat
                 int deltaX = Convert.ToUInt16(random.Next(variance * -1, variance));
                 int deltaY = Convert.ToUInt16(random.Next(variance * -1, variance));
 
-                ushort AbsoluteYPixelStepSize = CoordinateConversion.GetAbsoluteYPixelStepSize();
-                ushort AbsoluteXPixelStepSize = CoordinateConversion.GetAbsoluteXPixelStepSize();
+                double AbsoluteYPixelStepSize = CoordinateConversion.GetAbsoluteYPixelStepSize();
+                double AbsoluteXPixelStepSize = CoordinateConversion.GetAbsoluteXPixelStepSize();
 
                 //convert deltas from pixels to absolute value
-                int finalDeltaX = deltaX * (int)AbsoluteXPixelStepSize;
-                int finalDeltaY = deltaY * (int)AbsoluteYPixelStepSize;
+                int finalDeltaX = (int)((double)deltaX * AbsoluteXPixelStepSize);
+                int finalDeltaY = (int)((double)deltaY * AbsoluteYPixelStepSize);
 
                 if (CheckForOverflow(DestinationAbsoluteX, finalDeltaX))
                 {
