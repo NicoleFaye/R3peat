@@ -9,5 +9,7 @@
         double GetAbsoluteXPixelStepSize();
 
         double GetAbsoluteYPixelStepSize();
+        int AbsoluteYToPixelY(ushort AbsoluteY);
+        int AbsoluteXToPixelX(ushort AbsoluteX);
     }
 }

@@ -22,13 +22,16 @@ namespace R3peat
         public int AbsoluteXToPixelX(ushort AbsoluteX) {
             int minPixelX = (int)SystemParameters.VirtualScreenLeft;
             int screenWidth = (int)SystemParameters.VirtualScreenWidth;
-
             int PixelX = (int)Math.Round(((double)AbsoluteX * (((double)(screenWidth - 1) / (double)ushort.MaxValue))));
-
             PixelX+= minPixelX;
-
-
             return PixelX;
+        }
+        public int AbsoluteYToPixelY(ushort AbsoluteY) {
+            int minPixelY = (int)SystemParameters.VirtualScreenTop;
+            int screenHeight= (int)SystemParameters.VirtualScreenHeight;
+            int PixelY = (int)Math.Round(((double)AbsoluteY * (((double)(screenHeight- 1) / (double)ushort.MaxValue))));
+            PixelY+= minPixelY;
+            return PixelY;
         }
         public ushort PixelXToAbsoluteX(int PixelX)
         {
