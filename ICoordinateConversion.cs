@@ -6,8 +6,8 @@
 
         ushort PixelXToAbsoluteX(int PixelX);
 
-        ushort GetAbsoluteXPixelStepSize();
+        double GetAbsoluteXPixelStepSize();
 
-        ushort GetAbsoluteYPixelStepSize();
+        double GetAbsoluteYPixelStepSize();
     }
 }
