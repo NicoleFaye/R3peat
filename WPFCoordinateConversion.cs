@@ -16,10 +16,20 @@ namespace R3peat
             {
                 throw new ArgumentOutOfRangeException();
             }
-            ushort AbsoluteY = (ushort)(((double)AdjustedPixelY) * (((double)ushort.MaxValue) / ((double)(screenHeight - 1))));
+            ushort AbsoluteY = (ushort)Math.Round(((double)AdjustedPixelY) * (((double)ushort.MaxValue) / ((double)(screenHeight - 1))));
             return AbsoluteY;
         }
+        public int AbsoluteXToPixelX(ushort AbsoluteX) {
+            int minPixelX = (int)SystemParameters.VirtualScreenLeft;
+            int screenWidth = (int)SystemParameters.VirtualScreenWidth;
 
+            int PixelX = (int)Math.Round(((double)AbsoluteX * (((double)(screenWidth - 1) / (double)ushort.MaxValue))));
+
+            PixelX+= minPixelX;
+
+
+            return PixelX;
+        }
         public ushort PixelXToAbsoluteX(int PixelX)
         {
             int minPixelX = (int)SystemParameters.VirtualScreenLeft;
@@ -30,21 +40,21 @@ namespace R3peat
             {
                 throw new ArgumentOutOfRangeException();
             }
-            ushort AbsoluteX = (ushort)(((double)AdjustedPixelX) * (((double)ushort.MaxValue) / ((double)(screenWidth - 1))));
+            ushort AbsoluteX = (ushort)Math.Round(((double)AdjustedPixelX) * (((double)ushort.MaxValue) / ((double)(screenWidth - 1))));
             return AbsoluteX;
         }
 
-        public ushort GetAbsoluteXPixelStepSize()
+        public double GetAbsoluteXPixelStepSize()
         {
             int screenWidth = (int)SystemParameters.VirtualScreenWidth;
-            ushort AbsoluteX = (ushort)(((double)ushort.MaxValue) / ((double)(screenWidth - 1)));
+            double AbsoluteX = ((double)ushort.MaxValue) / ((double)(screenWidth - 1));
             return AbsoluteX;
         }
 
-        public ushort GetAbsoluteYPixelStepSize()
+        public double GetAbsoluteYPixelStepSize()
         {
             int screenHeight = (int)SystemParameters.VirtualScreenHeight;
-            ushort AbsoluteY = (ushort)(((double)ushort.MaxValue) / ((double)(screenHeight - 1)));
+            double AbsoluteY = ((double)ushort.MaxValue) / ((double)(screenHeight - 1));
             return AbsoluteY;
         }
     }
