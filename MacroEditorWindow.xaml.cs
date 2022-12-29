@@ -20,6 +20,7 @@ namespace R3peat
     public partial class MacroEditorWindow : Window
     {
         public MacroEditorModel MacroEditorModel = new MacroEditorModel();
+        public WPFCoordinateConversion Converter = new WPFCoordinateConversion();
         public MacroEditorWindow()
         {
             InitializeComponent();
