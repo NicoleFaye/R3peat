@@ -70,10 +70,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MacroEditorWindowOld.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="Action.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -92,10 +88,6 @@
       <DependentUpon>MacroEditorWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPFCoordinateConversion.cs" />
-    <Compile Include="MacroEditorWindowOld.xaml.cs">
-      <DependentUpon>MacroEditorWindowOld.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
     <Page Include="MacroEditorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

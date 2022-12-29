@@ -67,5 +67,8 @@ namespace R3peat
         {
             MacroEditorModel.SelectedActionChanged((Action)ActionList.SelectedItem);
         }
+        public void AddNewMouseMovementStep(object sender, RoutedEventArgs e) { }
+        public void ChangeMouseMovementStepOrderSooner(object sender, RoutedEventArgs e) { }
+        public void ChangeMouseMovementStepOrderLater(object sender, RoutedEventArgs e) { }
     }
 }
