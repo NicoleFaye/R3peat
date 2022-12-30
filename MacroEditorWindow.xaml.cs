@@ -37,6 +37,17 @@ namespace R3peat
             Binding MouseMovementVisibilityBinding = new Binding("MouseMovementEditorGridVisibility");
             MouseMovementVisibilityBinding.Source = MacroEditorModel;
             MouseMovementEditorGrid.SetBinding(Grid.VisibilityProperty, MouseMovementVisibilityBinding);
+
+        }
+        private void PauseNameChanged(object sender, TextChangedEventArgs e) {
+            if (PauseNameTextBox.Text == "") {
+                ((Action)ActionList.SelectedItem).Name = "Pause";
+                return;
+            }
+            if (ActionList.SelectedIndex >= 0) { 
+                ((Action)ActionList.SelectedItem).Name = PauseNameTextBox.Text;
+            }
+
         }
         private void ChangeActionOrderSooner(object sender, RoutedEventArgs e)
         {
@@ -66,6 +77,27 @@ namespace R3peat
 
         public void OnActionListSelectionChange(object sender, SelectionChangedEventArgs e)
         {
+            Action CurrentAction = (Action)ActionList.SelectedItem;
+            if (CurrentAction == null) return;
+
+            if (CurrentAction.GetType() == typeof(Pause))
+            {
+                MacroEditorModel.PauseEditorGridVisibility= Visibility.Visible;
+                PauseNameTextBox.Text = CurrentAction.Name;
+
+            }
+            else
+            {
+                MacroEditorModel.PauseEditorGridVisibility= Visibility.Hidden;
+            }
+            if (CurrentAction.GetType() == typeof(MouseMovement))
+            {
+                MacroEditorModel.MouseMovementEditorGridVisibility = Visibility.Visible;
+            }
+            else
+            {
+                MacroEditorModel.MouseMovementEditorGridVisibility = Visibility.Hidden;
+            }
             MacroEditorModel.SelectedActionChanged((Action)ActionList.SelectedItem);
         }
         public void AddNewMouseMovementStep(object sender, RoutedEventArgs e) { }

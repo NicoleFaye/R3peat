@@ -14,7 +14,7 @@ namespace R3peat
 
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        public ObservableCollection<Action> actions = new ObservableCollection<Action>();
+        public ObservableCollection<Action> actions { get; set; } = new ObservableCollection<Action>();
         private InputSimulator input = new InputSimulator();
         private MouseMovementBuilder MouseMovementBuilder;
         private PauseBuilder PauseBuilder;
@@ -67,6 +67,7 @@ namespace R3peat
             if (CurrentAction.GetType() == typeof(Pause))
             {
                 PauseEditorGridVisibility= Visibility.Visible;
+
             }
             else
             {
