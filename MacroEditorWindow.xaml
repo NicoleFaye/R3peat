@@ -26,7 +26,6 @@
                         <Grid Margin="0,2">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
-                                <!--" ColumnDefinition Width="100"/>-->
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="{Binding Name}" Grid.Column="0"/>
                         </Grid>
@@ -103,7 +102,6 @@
                         <Grid Margin="0,2">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
-                                <!--" ColumnDefinition Width="100"/>-->
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="{Binding Name}" Grid.Column="0"/>
                         </Grid>
