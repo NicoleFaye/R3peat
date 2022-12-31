@@ -43,40 +43,61 @@ namespace R3peat
             MouseMovementEditorGrid.SetBinding(Grid.VisibilityProperty, MouseMovementVisibilityBinding);
 
         }
-        private void PauseNameChanged(object sender, TextChangedEventArgs e) {
-            if (PauseNameTextBox.Text == "") {
+        private void PauseNameChanged(object sender, TextChangedEventArgs e)
+        {
+            if (PauseNameTextBox.Text == "")
+            {
                 ((Action)ActionList.SelectedItem).Name = "Pause";
                 return;
             }
-            if (ActionList.SelectedIndex >= 0) { 
+            if (ActionList.SelectedIndex >= 0)
+            {
                 ((Action)ActionList.SelectedItem).Name = PauseNameTextBox.Text;
             }
 
         }
-        private void PauseDurationChanged(NumberBox sender, NumberBoxValueChangedEventArgs e) {
+        private void PauseDurationChanged(NumberBox sender, NumberBoxValueChangedEventArgs e)
+        {
             NumberBox _sender = sender;
-            if (_sender.Value == double.NaN) {
+            if (_sender.Value == double.NaN)
+            {
                 ((Pause)ActionList.SelectedItem).Duration = 0;
                 return;
             }
-            if (ActionList.SelectedIndex >= 0) {
+            if (ActionList.SelectedIndex >= 0)
+            {
                 ((Pause)ActionList.SelectedItem).Duration = (int)_sender.Value;
             }
         }
-        private void ActionNameChanged(object sender , TextChangedEventArgs e) {
+        private void ActionNameChanged(object sender, TextChangedEventArgs e)
+        {
             TextBox _sender = (TextBox)sender;
-            if (_sender.Text == "") {
+            if (_sender.Text == "")
+            {
                 ((Action)ActionList.SelectedItem).Name = "Mouse Movement";
                 return;
             }
-            if (ActionList.SelectedIndex >= 0) {
+            if (ActionList.SelectedIndex >= 0)
+            {
                 ((Action)(ActionList.SelectedItem)).Name = _sender.Text;
             }
+        }
+        private void MouseMovementStepNameChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox _sender = (TextBox)sender;
+            if (_sender.Text == "")
+            {
+                ((MouseMovementStep)MouseMovementStepList.SelectedItem).Name = "Mouse Movement Step";
+                return;
+            }
+            ((MouseMovementStep)MouseMovementStepList.SelectedItem).Name = _sender.Text;
+            return;
         }
         private void ChangeActionOrderSooner(object sender, RoutedEventArgs e)
         {
             int currentIndex = ActionList.SelectedIndex;
-            if (currentIndex <=0) {
+            if (currentIndex <= 0)
+            {
                 return;
             }
             MacroEditorModel.ChangeActionOrderSooner(currentIndex);
@@ -99,35 +120,46 @@ namespace R3peat
         }
 
 
-        public void OnActionListSelectionChange(object sender, SelectionChangedEventArgs e)
+        public void OnMouseMovementStepSelectionChanged(object sender, SelectionChangedEventArgs e) {
+            MouseMovementStep CurrentStep = (MouseMovementStep)((ListBox)sender).SelectedItem;
+            if (CurrentStep == null) return;
+            MouseMovementStepNameTextBox.Text = CurrentStep.Name;
+        }
+        public void OnActionListSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Action CurrentAction = (Action)ActionList.SelectedItem;
             if (CurrentAction == null) return;
 
             if (CurrentAction.GetType() == typeof(Pause))
             {
-                MacroEditorModel.PauseEditorGridVisibility= Visibility.Visible;
+                MacroEditorModel.PauseEditorGridVisibility = Visibility.Visible;
                 PauseNameTextBox.Text = CurrentAction.Name;
                 PauseDurationNumberBox.Value = ((Pause)CurrentAction).Duration;
 
             }
             else
             {
-                MacroEditorModel.PauseEditorGridVisibility= Visibility.Hidden;
+                MacroEditorModel.PauseEditorGridVisibility = Visibility.Hidden;
             }
             if (CurrentAction.GetType() == typeof(MouseMovement))
             {
                 MacroEditorModel.MouseMovementEditorGridVisibility = Visibility.Visible;
-                MouseMovementNameTextBox.Text= CurrentAction.Name;
+                MouseMovementNameTextBox.Text = CurrentAction.Name;
+                MouseMovementStepList.ItemsSource = ((MouseMovement)CurrentAction).MouseMovementSteps;
             }
             else
             {
                 MacroEditorModel.MouseMovementEditorGridVisibility = Visibility.Hidden;
             }
-            MacroEditorModel.SelectedActionChanged((Action)ActionList.SelectedItem);
         }
-        public void AddNewMouseMovementStep(object sender, RoutedEventArgs e) { }
-        public void ChangeMouseMovementStepOrderSooner(object sender, RoutedEventArgs e) { }
+        public void AddNewMouseMovementStep(object sender, RoutedEventArgs e)
+        {
+            MouseMovement CurrentMovement= ((MouseMovement)ActionList.SelectedItem);
+            CurrentMovement.MouseMovementSteps.Add(new MouseMovementStep(CurrentMovement.MouseMovementStepNameIncrementer.Next()));
+        }
+        public void ChangeMouseMovementStepOrderSooner(object sender, RoutedEventArgs e) {
+            return;
+        }
         public void ChangeMouseMovementStepOrderLater(object sender, RoutedEventArgs e) { }
 
     }
