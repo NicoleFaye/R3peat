@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Threading;
 using WindowsInput;
 
@@ -8,8 +10,9 @@ namespace R3peat
     class MouseMovement : Action
     {
         private InputSimulator Input;
-        private List<MouseMovementStep> MouseMovementSteps;
+        public ObservableCollection<MouseMovementStep> MouseMovementSteps { get; set; }
         private readonly ICoordinateConversion CoordinateConversion = new WPFCoordinateConversion();
+        public NameIncrementer MouseMovementStepNameIncrementer;
         
         override public void Run()
         {
@@ -58,11 +61,12 @@ namespace R3peat
                 Thread.Sleep(mouseMovementStep.GetPauseMillisecondDuration());
             }
         }
-        public MouseMovement(InputSimulator Input,String Name, List<MouseMovementStep> Steps)
+        public MouseMovement(InputSimulator Input,String Name, ObservableCollection<MouseMovementStep> Steps)
         {
             this.Name = Name;
             this.Input = Input;
             this.MouseMovementSteps = Steps;
+            this.MouseMovementStepNameIncrementer = new NameIncrementer("Mouse Movement Step");
         }
 
         private bool CheckForOverflow(ushort startingValue, int delta)
