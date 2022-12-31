@@ -80,6 +80,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Compile Include="NumberBoxIntegerFormatter.cs" />
     <Compile Include="MacroEditorModel.cs" />
     <Compile Include="ICoordinateConversion.cs" />
     <Compile Include="PauseBuilder.cs" />

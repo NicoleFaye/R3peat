@@ -72,9 +72,9 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" Content="Pause Name: " HorizontalAlignment="Right" VerticalAlignment="Center" />
-                <TextBox Name="PauseNameTextBox" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" TextChanged="PauseNameChanged"/>
+                <TextBox Name="PauseNameTextBox" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" TextChanged="ActionNameChanged" />
                 <Label Content="Duration:" HorizontalAlignment="Right" Margin="0,0,10,0" Grid.Row="1" VerticalAlignment="Center"/>
-                <ui:NumberBox Name="PauseDurationTextBox" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,0,0,0" Grid.Row="1" VerticalAlignment="Center" Grid.ColumnSpan="1" TextAlignment="Right"/>
+                <ui:NumberBox Name="PauseDurationNumberBox" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,0,0,0" Grid.Row="1" VerticalAlignment="Center" Grid.ColumnSpan="1" TextAlignment="Right" ValidationMode="InvalidInputOverwritten" ValueChanged="PauseDurationChanged"/>
                 <Label Content="ms" HorizontalAlignment="Left" Margin="2,0,0,0" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"/>
             </Grid>
 
@@ -123,7 +123,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Label Grid.Row="1" Content="Mouse Movement Name: " HorizontalAlignment="Right" VerticalAlignment="Center" />
-                <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.ColumnSpan="2"/>
+                <TextBox Name="MouseMovementNameTextBox" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" TextChanged="ActionNameChanged"/>
             </Grid>
 
 

@@ -4,18 +4,18 @@ namespace R3peat
 {
     class Pause: Action
     {
-        private int Delay;
+        public int Duration {get;set;}
         override public void Run() {
-            Thread.Sleep(this.Delay);
+            Thread.Sleep(this.Duration);
         }
         public Pause(int milliseconds)
         {
-            this.Delay= milliseconds;
+            this.Duration= milliseconds;
             this.Name = "";
         }
         public Pause(int milliseconds,string Name)
         {
-            this.Delay= milliseconds;
+            this.Duration= milliseconds;
             this.Name = Name;
         }
     }

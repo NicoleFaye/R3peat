@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModernWpf.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Windows.Globalization.NumberFormatting;
 
 namespace R3peat
 {
@@ -27,6 +29,8 @@ namespace R3peat
             ActionList.ItemsSource = MacroEditorModel.actions;
             NewActionTypeComboBox.ItemsSource = Enum.GetValues(typeof(ActionType));
 
+            NumberBoxIntegerFormatter numberBoxIntegerFormatter = new NumberBoxIntegerFormatter();
+            PauseDurationNumberBox.NumberFormatter = numberBoxIntegerFormatter;
 
             //sets up binding for PauseEditorGrid visibility 
             Binding PauseEditorVisibilityBinding = new Binding("PauseEditorGridVisibility");
@@ -48,6 +52,26 @@ namespace R3peat
                 ((Action)ActionList.SelectedItem).Name = PauseNameTextBox.Text;
             }
 
+        }
+        private void PauseDurationChanged(NumberBox sender, NumberBoxValueChangedEventArgs e) {
+            NumberBox _sender = sender;
+            if (_sender.Value == double.NaN) {
+                ((Pause)ActionList.SelectedItem).Duration = 0;
+                return;
+            }
+            if (ActionList.SelectedIndex >= 0) {
+                ((Pause)ActionList.SelectedItem).Duration = (int)_sender.Value;
+            }
+        }
+        private void ActionNameChanged(object sender , TextChangedEventArgs e) {
+            TextBox _sender = (TextBox)sender;
+            if (_sender.Text == "") {
+                ((Action)ActionList.SelectedItem).Name = "Mouse Movement";
+                return;
+            }
+            if (ActionList.SelectedIndex >= 0) {
+                ((Action)(ActionList.SelectedItem)).Name = _sender.Text;
+            }
         }
         private void ChangeActionOrderSooner(object sender, RoutedEventArgs e)
         {
@@ -84,6 +108,7 @@ namespace R3peat
             {
                 MacroEditorModel.PauseEditorGridVisibility= Visibility.Visible;
                 PauseNameTextBox.Text = CurrentAction.Name;
+                PauseDurationNumberBox.Value = ((Pause)CurrentAction).Duration;
 
             }
             else
@@ -93,6 +118,7 @@ namespace R3peat
             if (CurrentAction.GetType() == typeof(MouseMovement))
             {
                 MacroEditorModel.MouseMovementEditorGridVisibility = Visibility.Visible;
+                MouseMovementNameTextBox.Text= CurrentAction.Name;
             }
             else
             {
@@ -103,5 +129,6 @@ namespace R3peat
         public void AddNewMouseMovementStep(object sender, RoutedEventArgs e) { }
         public void ChangeMouseMovementStepOrderSooner(object sender, RoutedEventArgs e) { }
         public void ChangeMouseMovementStepOrderLater(object sender, RoutedEventArgs e) { }
+
     }
 }
