@@ -8,11 +8,10 @@ namespace R3peat
         private int PauseDuration;
         private Pause pause;
         private string Name;
-        private int totalBuiltWithNoName { get; set; }
+        private NameIncrementer NameIncrementer;
         public void BuildPause() {
             this.PauseDuration = 100;
-            this.totalBuiltWithNoName+=1;
-            this.Name = "Pause "+totalBuiltWithNoName.ToString();
+            this.Name = NameIncrementer.Next();
             this.pause = new Pause(this.PauseDuration,this.Name);
         }
         public void BuildPause(string Name) {
@@ -29,6 +28,7 @@ namespace R3peat
         }
 
         public PauseBuilder() {
+            this.NameIncrementer = new NameIncrementer("Pause");
         }
 
     }
