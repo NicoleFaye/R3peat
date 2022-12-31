@@ -23,7 +23,7 @@ namespace R3peat
 
         public double? ParseDouble(string text)
         {
-            return Math.Floor((double)_formatter.ParseDouble(text));
+            return _formatter.ParseDouble(text);
         }
     }
 }
