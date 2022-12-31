@@ -20,7 +20,7 @@
                 <RowDefinition Height="35"/>
             </Grid.RowDefinitions>
             <Label Content="Action List" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <ListBox x:Name="ActionList" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="OnActionListSelectionChange" >
+            <ListBox x:Name="ActionList" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="OnActionListSelectionChanged" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="0,2">
@@ -47,7 +47,7 @@
         </Grid>
 
 
-        <Grid Name="PauseEditorGrid" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Visibility="Visible" >
+        <Grid Name="PauseEditorGrid" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Visibility="Hidden" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -82,9 +82,9 @@
         </Grid>
 
 
-        <Grid Name="MouseMovementEditorGrid" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Visibility="Hidden" >
+        <Grid Name="MouseMovementEditorGrid" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Visibility="Visible" >
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1.1*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
@@ -97,7 +97,7 @@
             </Grid.RowDefinitions>
             <Label Content="Mouse Movement Step Details" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Label Grid.Row="2" Content="Mouse Movement Step List" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="1"/>
-            <ListBox x:Name="MouseMovementStepList" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Stretch" d:ItemsSource="{d:SampleData ItemCount=5}"  >
+            <ListBox  SelectionChanged="OnMouseMovementStepSelectionChanged" Name="MouseMovementStepList" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Stretch" d:ItemsSource="{d:SampleData ItemCount=5}"  >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="0,2">
@@ -166,7 +166,7 @@
                 <Label Content="Pixel Y: " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2"/>
                 <Label Content="Absolute X: " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2" Grid.Row="1"/>
                 <Label Content="Absolute Y: " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2"/>
-                <TextBox TextWrapping="NoWrap" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.ColumnSpan="3"/>
+                <TextBox Name="MouseMovementStepNameTextBox" TextWrapping="NoWrap" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.ColumnSpan="3" TextChanged="MouseMovementStepNameChanged"/>
                 <ui:NumberBox Name="MouseMovementStepPixelXNumberBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1"/>
                 <ui:NumberBox Name="MouseMovementStepPixelYNumberBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2"/>
                 <ui:NumberBox Name="MouseMovementStepAbsoluteXNumberBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="3" Grid.Row="1"/>
