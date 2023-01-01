@@ -98,6 +98,18 @@ namespace R3peat
             actions[currentIndex - 1] = actions[currentIndex];
             actions[currentIndex] = swap;
         }
-
+        public void ChangeStepOrderSooner(int index , ObservableCollection<MouseMovementStep> steps) {
+            if (index <= 0) return;
+            MouseMovementStep swap = steps[index-1];
+            steps[index-1] = steps[index];
+            steps[index] = swap;
+        }
+        public void ChangeStepOrderLater(int index,ObservableCollection<MouseMovementStep> steps)
+        {
+            if (index + 1 >= steps.Count) return;
+            MouseMovementStep swap = steps[index + 1];
+            steps[index + 1] = steps[index];
+            steps[index] = swap;
+        }
     }
 }

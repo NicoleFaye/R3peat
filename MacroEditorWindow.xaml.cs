@@ -85,6 +85,7 @@ namespace R3peat
         private void MouseMovementStepNameChanged(object sender, TextChangedEventArgs e)
         {
             TextBox _sender = (TextBox)sender;
+            if (MouseMovementStepList.SelectedIndex < 0) return;
             if (_sender.Text == "")
             {
                 ((MouseMovementStep)MouseMovementStepList.SelectedItem).Name = "Mouse Movement Step";
@@ -122,8 +123,26 @@ namespace R3peat
 
         public void OnMouseMovementStepSelectionChanged(object sender, SelectionChangedEventArgs e) {
             MouseMovementStep CurrentStep = (MouseMovementStep)((ListBox)sender).SelectedItem;
-            if (CurrentStep == null) return;
-            MouseMovementStepNameTextBox.Text = CurrentStep.Name;
+            if (CurrentStep == null)
+            {
+                MouseMovementStepNameTextBox.Text = "";
+                MouseMovementStepAbsoluteXNumberBox.Value = 0;
+                MouseMovementStepAbsoluteYNumberBox.Value = 0;
+                MouseMovementStepPauseDurationNumberBox.Value = 0;
+                MouseMovementStepPixelVarianceNumberBox.Value = 0;
+                MouseMovementStepPixelXNumberBox.Value = 0;
+                MouseMovementStepPixelYNumberBox.Value = 0;
+            }
+            else
+            {
+                MouseMovementStepNameTextBox.Text = CurrentStep.Name;
+                MouseMovementStepAbsoluteXNumberBox.Value = CurrentStep.GetDestinationAbsoluteX();
+                MouseMovementStepAbsoluteYNumberBox.Value = CurrentStep.GetDestinationAbsoluteY();
+                MouseMovementStepPauseDurationNumberBox.Value = CurrentStep.GetPauseMillisecondDuration();
+                MouseMovementStepPixelVarianceNumberBox.Value = CurrentStep.GetVariance();
+                MouseMovementStepPixelXNumberBox.Value = Converter.AbsoluteXToPixelX(CurrentStep.GetDestinationAbsoluteX());
+                MouseMovementStepPixelYNumberBox.Value = Converter.AbsoluteYToPixelY(CurrentStep.GetDestinationAbsoluteY());
+            }
         }
         public void OnActionListSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -158,9 +177,26 @@ namespace R3peat
             CurrentMovement.MouseMovementSteps.Add(new MouseMovementStep(CurrentMovement.MouseMovementStepNameIncrementer.Next()));
         }
         public void ChangeMouseMovementStepOrderSooner(object sender, RoutedEventArgs e) {
-            return;
+            int currentIndex = MouseMovementStepList.SelectedIndex;
+            MouseMovement currentMovement = (MouseMovement)ActionList.SelectedItem;
+            if (currentIndex <= 0)
+            {
+                return;
+            }
+            MacroEditorModel.ChangeStepOrderSooner(currentIndex, currentMovement.MouseMovementSteps);
+            MouseMovementStepList.SelectedIndex = currentIndex - 1;
         }
-        public void ChangeMouseMovementStepOrderLater(object sender, RoutedEventArgs e) { }
+        public void ChangeMouseMovementStepOrderLater(object sender, RoutedEventArgs e)
+        {
+            int currentIndex = MouseMovementStepList.SelectedIndex;
+            MouseMovement currentMovement = (MouseMovement)ActionList.SelectedItem;
+            if (currentIndex >= currentMovement.MouseMovementSteps.Count)
+            {
+                return;
+            }
+            MacroEditorModel.ChangeStepOrderLater(currentIndex, currentMovement.MouseMovementSteps);
+            MouseMovementStepList.SelectedIndex = currentIndex + 1;
+        }
 
     }
 }
