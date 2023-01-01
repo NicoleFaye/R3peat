@@ -80,6 +80,8 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Compile Include="Macro.cs" />
+    <Compile Include="NameAndDescriptionProperty.cs" />
     <Compile Include="NameProperty.cs" />
     <Compile Include="NameIncrementer.cs" />
     <Compile Include="NumberBoxIntegerFormatter.cs" />

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace R3peat
 {
-    public class Macro : NameProperty 
+    public class Macro : NameAndDescriptionProperty 
     {
         NameIncrementer NameIncrementer = new NameIncrementer("Macro");
     }

@@ -23,7 +23,7 @@ namespace R3peat
                 onPropertyChanged("Name");
             }
         }
-        private void onPropertyChanged(string propertyName)
+        protected void onPropertyChanged(string propertyName)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null)

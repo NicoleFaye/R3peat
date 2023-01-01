@@ -94,6 +94,14 @@ namespace R3peat
             ((MouseMovementStep)MouseMovementStepList.SelectedItem).Name = _sender.Text;
             return;
         }
+        private void MouseMovementStepAbsoluteXChanged(NumberBox sender, NumberBoxValueChangedEventArgs e) { 
+            if(MouseMovementStepList.SelectedIndex < 0) return;
+            if (sender.Value == double.NaN) {
+                
+            }
+
+        }
+
         private void ChangeActionOrderSooner(object sender, RoutedEventArgs e)
         {
             int currentIndex = ActionList.SelectedIndex;
