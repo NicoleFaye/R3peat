@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,11 +18,18 @@ namespace R3peat
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class MainWindow : Window
     {
-        public Window1()
+        ObservableCollection<Macro> macroList = new ObservableCollection<Macro>();
+        public MainWindow()
         {
             InitializeComponent();
+            MainItemsRepeater.ItemsSource = macroList;
+        }
+        private void NewMacro(object sender, RoutedEventArgs e) {
+            Macro test = new Macro();
+            test.Name = "test macro name";
+            macroList.Add(test);
         }
     }
 }
