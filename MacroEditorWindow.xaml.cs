@@ -97,7 +97,7 @@ namespace R3peat
         private void MouseMovementStepAbsoluteXChanged(NumberBox sender, NumberBoxValueChangedEventArgs e) { 
             if(MouseMovementStepList.SelectedIndex < 0) return;
             if (sender.Value == double.NaN) {
-                
+                ;
             }
 
         }
