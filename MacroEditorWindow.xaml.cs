@@ -23,9 +23,14 @@ namespace R3peat
     {
         public MacroEditorModel MacroEditorModel = new MacroEditorModel();
         public WPFCoordinateConversion Converter = new WPFCoordinateConversion();
-        public MacroEditorWindow()
+        public MacroEditorWindow(Macro macro)
         {
             InitializeComponent();
+            
+            
+            this.MacroEditorModel = new MacroEditorModel(macro);
+
+
             ActionList.ItemsSource = MacroEditorModel.actions;
             NewActionTypeComboBox.ItemsSource = Enum.GetValues(typeof(ActionType));
 
