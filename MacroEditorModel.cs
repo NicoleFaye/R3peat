@@ -14,7 +14,8 @@ namespace R3peat
 
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        public ObservableCollection<Action> actions { get; set; } = new ObservableCollection<Action>();
+        public Macro CurrentMacro;
+        public ObservableCollection<Action> actions { get; set; } 
         private InputSimulator input = new InputSimulator();
         private MouseMovementBuilder MouseMovementBuilder;
         private PauseBuilder PauseBuilder;
@@ -55,10 +56,14 @@ namespace R3peat
 
         public MacroEditorModel()
         {
+            CurrentMacro=new Macro("DebugMacroName");
             MouseMovementBuilder = new MouseMovementBuilder(input);
             PauseBuilder = new PauseBuilder();
             MouseMovementEditorGridVisibility = Visibility.Hidden;
             PauseEditorGridVisibility = Visibility.Hidden;
+        }
+        public MacroEditorModel(Macro macro) :this(){
+            this.CurrentMacro = macro;
         }
 
 
