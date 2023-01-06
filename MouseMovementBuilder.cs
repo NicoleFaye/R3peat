@@ -5,7 +5,7 @@ using WindowsInput;
 
 namespace R3peat
 {
-    class MouseMovementBuilder
+    public class MouseMovementBuilder
     {
         private ObservableCollection<MouseMovementStep> MouseMovementSteps;
         private InputSimulator Input;

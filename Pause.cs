@@ -2,7 +2,7 @@
 
 namespace R3peat
 {
-    class Pause: Action
+    public class Pause: Action
     {
         public int Duration {get;set;}
         override public void Run() {

@@ -21,7 +21,7 @@ namespace R3peat
     /// </summary>
     public partial class MacroEditorWindow : Window
     {
-        public MacroEditorModel MacroEditorModel = new MacroEditorModel();
+        public MacroEditorModel MacroEditorModel;
         public WPFCoordinateConversion Converter = new WPFCoordinateConversion();
         public MacroEditorWindow(Macro macro)
         {
@@ -31,7 +31,7 @@ namespace R3peat
             this.MacroEditorModel = new MacroEditorModel(macro);
 
 
-            ActionList.ItemsSource = MacroEditorModel.actions;
+            ActionList.ItemsSource = MacroEditorModel.CurrentMacro.Actions;
             NewActionTypeComboBox.ItemsSource = Enum.GetValues(typeof(ActionType));
 
             NumberBoxIntegerFormatter numberBoxIntegerFormatter = new NumberBoxIntegerFormatter();
@@ -120,7 +120,7 @@ namespace R3peat
         private void ChangeActionOrderLater(object sender, RoutedEventArgs e)
         {
             int currentIndex = ActionList.SelectedIndex;
-            if (currentIndex >= MacroEditorModel.actions.Count)
+            if (currentIndex >= MacroEditorModel.CurrentMacro.Actions.Count)
             {
                 return;
             }

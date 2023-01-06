@@ -15,10 +15,9 @@ namespace R3peat
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public Macro CurrentMacro;
-        public ObservableCollection<Action> actions { get; set; } 
         private InputSimulator input = new InputSimulator();
-        private MouseMovementBuilder MouseMovementBuilder;
-        private PauseBuilder PauseBuilder;
+        protected MouseMovementBuilder MouseMovementBuilder;
+        protected PauseBuilder PauseBuilder;
         private Visibility mouseMovementEditorGridVisibility;
         
         public Visibility MouseMovementEditorGridVisibility
@@ -54,16 +53,12 @@ namespace R3peat
             }
         }
 
-        public MacroEditorModel()
-        {
-            CurrentMacro=new Macro("DebugMacroName");
+        public MacroEditorModel(Macro macro) { 
+            this.CurrentMacro = macro;
             MouseMovementBuilder = new MouseMovementBuilder(input);
             PauseBuilder = new PauseBuilder();
             MouseMovementEditorGridVisibility = Visibility.Hidden;
             PauseEditorGridVisibility = Visibility.Hidden;
-        }
-        public MacroEditorModel(Macro macro) :this(){
-            this.CurrentMacro = macro;
         }
 
 
@@ -73,11 +68,11 @@ namespace R3peat
             {
                 case ActionType.Pause:
                     PauseBuilder.BuildPause();
-                    actions.Add(PauseBuilder.GetPause());
+                    CurrentMacro.Actions.Add(PauseBuilder.GetPause());
                     break;
                 case ActionType.MouseMovement:
                     MouseMovementBuilder.BuildMouseMovement();
-                    actions.Add(MouseMovementBuilder.GetMouseMovement());
+                    CurrentMacro.Actions.Add(MouseMovementBuilder.GetMouseMovement());
                     break;
                 default:
                     break;
@@ -85,13 +80,13 @@ namespace R3peat
         }
         public void ChangeActionOrderLater(int currentIndex)
         {
-            if (currentIndex + 1 >= actions.Count)
+            if (currentIndex + 1 >= CurrentMacro.Actions.Count)
             {
                 return;
             }
-            Action swap = actions[currentIndex + 1];
-            actions[currentIndex + 1] = actions[currentIndex];
-            actions[currentIndex] = swap;
+            Action swap = CurrentMacro.Actions[currentIndex + 1];
+            CurrentMacro.Actions[currentIndex + 1] = CurrentMacro.Actions[currentIndex];
+            CurrentMacro.Actions[currentIndex] = swap;
         }
         public void ChangeActionOrderSooner(int currentIndex)
         {
@@ -99,9 +94,9 @@ namespace R3peat
             {
                 return;
             }
-            Action swap = actions[currentIndex - 1];
-            actions[currentIndex - 1] = actions[currentIndex];
-            actions[currentIndex] = swap;
+            Action swap = CurrentMacro.Actions[currentIndex - 1];
+            CurrentMacro.Actions[currentIndex - 1] = CurrentMacro.Actions[currentIndex];
+            CurrentMacro.Actions[currentIndex] = swap;
         }
         public void ChangeStepOrderSooner(int index , ObservableCollection<MouseMovementStep> steps) {
             if (index <= 0) return;

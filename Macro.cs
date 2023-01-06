@@ -10,7 +10,7 @@ namespace R3peat
 {
     public class Macro : NameAndDescriptionProperty
     {
-        ObservableCollection<Action> Actions = new ObservableCollection<Action>();
+        public ObservableCollection<Action> Actions { get; set; }= new ObservableCollection<Action>();
         private bool _active;
         public bool Active
         {
@@ -24,8 +24,22 @@ namespace R3peat
                 base.onPropertyChanged("Active");
             }
         }
-        public Macro(string name)
+        private string _id;
+        public string ID
         {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                _id = value;
+                base.onPropertyChanged("ID");
+            }
+        }
+        public Macro(string name, string id)
+        {
+            this.ID = id;
             this.Name = name;
         }
     }

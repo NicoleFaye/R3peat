@@ -3,7 +3,7 @@ using WindowsInput;
 
 namespace R3peat
 {
-    class PauseBuilder 
+    public class PauseBuilder 
     {
         private int PauseDuration;
         private Pause pause;
