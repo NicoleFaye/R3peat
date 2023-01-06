@@ -21,12 +21,12 @@
 
         <ui:ItemsRepeaterScrollHost Grid.Row="1" >
             <ScrollViewer>
-                <ui:ItemsRepeater Name="MainItemsRepeater">
+                <ui:ItemsRepeater Name="MainItemsRepeater" HorizontalAlignment="Center">
                     <ui:ItemsRepeater.Layout>
                         <ui:UniformGridLayout/>
                     </ui:ItemsRepeater.Layout>
                     <DataTemplate DataType="Macro">
-                        <Border CornerRadius="15,15,15,15" Background="SlateGray"  Width="379" Height="100" Margin="10,10,10,10"  >
+                        <Border CornerRadius="15,15,15,15" Background="SlateGray"  Width="379" Height="100" Margin="10,10,10,10" HorizontalAlignment="Center" >
                             <Grid >
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
