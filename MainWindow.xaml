@@ -8,6 +8,9 @@
         Title="R3peat" Height="450" Width="800"
         xmlns:ui="http://schemas.modernwpf.com/2019"
         ui:WindowHelper.UseModernWindowStyle="True">
+    <Window.Resources>
+        
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -26,7 +29,7 @@
                         <ui:UniformGridLayout/>
                     </ui:ItemsRepeater.Layout>
                     <DataTemplate DataType="Macro">
-                        <Border CornerRadius="15,15,15,15" Background="SlateGray"  Width="379" Height="100" Margin="10,10,10,10" HorizontalAlignment="Center" >
+                        <Border CornerRadius="5" Background="SlateGray"  Width="379" Height="100" Margin="10,10,10,10" HorizontalAlignment="Center" >
                             <Grid >
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
