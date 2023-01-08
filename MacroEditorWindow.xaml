@@ -169,8 +169,8 @@
                 <TextBox Name="MouseMovementStepNameTextBox" TextWrapping="NoWrap" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.ColumnSpan="3" TextChanged="MouseMovementStepNameChanged"/>
                 <ui:NumberBox Name="MouseMovementStepPixelXNumberBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1"/>
                 <ui:NumberBox Name="MouseMovementStepPixelYNumberBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2"/>
-                <ui:NumberBox Name="MouseMovementStepAbsoluteXNumberBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="3" Grid.Row="1"/>
-                <ui:NumberBox Name="MouseMovementStepAbsoluteYNumberBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="3" Grid.Row="2"/>
+                <ui:NumberBox Name="MouseMovementStepAbsoluteXNumberBox" ValueChanged="MouseMovementStepAbsoluteXChanged" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="3" Grid.Row="1"/>
+                <ui:NumberBox Name="MouseMovementStepAbsoluteYNumberBox" ValueChanged="MouseMovementStepAbsoluteYChanged" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="3" Grid.Row="2"/>
                 <Grid Grid.Row="3" Grid.ColumnSpan="5" Grid.RowSpan="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1.5*"/>
