@@ -101,10 +101,33 @@ namespace R3peat
         }
         private void MouseMovementStepAbsoluteXChanged(NumberBox sender, NumberBoxValueChangedEventArgs e) { 
             if(MouseMovementStepList.SelectedIndex < 0) return;
-            if (sender.Value == double.NaN) {
-                ;
+            if (sender.Value == double.NaN)
+            {
+                sender.Value = 0;
             }
-
+            else if (sender.Value < 0)
+            {
+                sender.Value = 0;
+            }
+            else if (sender.Value > ushort.MaxValue) {
+                sender.Value = ushort.MaxValue;
+            }
+            MouseMovementStepPixelXNumberBox.Value= Converter.AbsoluteXToPixelX((ushort)sender.Value);
+        }
+        private void MouseMovementStepAbsoluteYChanged(NumberBox sender, NumberBoxValueChangedEventArgs e) { 
+            if(MouseMovementStepList.SelectedIndex < 0) return;
+            if (sender.Value == double.NaN)
+            {
+                sender.Value = 0;
+            }
+            else if (sender.Value < 0)
+            {
+                sender.Value = 0;
+            }
+            else if (sender.Value > ushort.MaxValue) {
+                sender.Value = ushort.MaxValue;
+            }
+            MouseMovementStepPixelYNumberBox.Value= Converter.AbsoluteYToPixelY((ushort)sender.Value);
         }
 
         private void ChangeActionOrderSooner(object sender, RoutedEventArgs e)
