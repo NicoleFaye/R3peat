@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Windows.Devices.Bluetooth.Background;
+using NHotkey.Wpf;
 
 namespace R3peat
 {
@@ -23,6 +24,7 @@ namespace R3peat
     {
         public ObservableCollection<Macro> MacroList = new ObservableCollection<Macro>();
         NameIncrementer MacroNameIncrementer = new NameIncrementer("Macro");
+
 
         int CurrentMacroID = 0;
 
