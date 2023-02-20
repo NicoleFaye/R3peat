@@ -80,6 +80,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Compile Include="HotkeyEditorModel.cs" />
     <Compile Include="HotkeyMode.cs" />
     <Compile Include="HotkeyObject.cs" />
     <Compile Include="HotkeyEditorWindow.xaml.cs">
