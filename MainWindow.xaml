@@ -41,7 +41,7 @@
                                 <Label Content="{Binding Name}" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
                                 <ui:ToggleSwitch Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" IsOn="{Binding Active}"/>
                                 <Button Content="Edit Macro" Tag="{Binding ID}" Click="EditMacro" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
-                                <Button Content="Edit Hotkey" Tag="{Binding ID}" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+                                <Button Content="Edit Hotkey" Tag="{Binding ID}" Click="EditHotkey" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
                                 
                             </Grid>
                         </Border>

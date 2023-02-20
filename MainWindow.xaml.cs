@@ -52,6 +52,10 @@ namespace R3peat
             EditorWindow.Show();
 
         }
+        private void EditHotkey(object sender, RoutedEventArgs e) {
+            HotkeyEditorWindow EditorWindow = new HotkeyEditorWindow();
+            EditorWindow.Show();
+        }
             
 
     }

@@ -11,6 +11,7 @@ namespace R3peat
     public class Macro : NameAndDescriptionProperty
     {
         public ObservableCollection<Action> Actions { get; set; }= new ObservableCollection<Action>();
+        private HotkeyObject Hotkey { get; set; }=new HotkeyObject();
         private bool _active;
         public bool Active
         {
