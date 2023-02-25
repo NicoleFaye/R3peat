@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using NHotkey.Wpf;
 
 namespace R3peat
 {
@@ -21,7 +22,7 @@ namespace R3peat
             }
         }
 
-        public HotkeyEditorModel(Macro macro) {
+        public HotkeyEditorModel(Macro macro, HotkeyManager hotkeyManager) {
             this.CurrentMacro = macro;
         
         }

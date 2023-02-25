@@ -24,7 +24,9 @@ namespace R3peat
     {
         public ObservableCollection<Macro> MacroList = new ObservableCollection<Macro>();
         NameIncrementer MacroNameIncrementer = new NameIncrementer("Macro");
-
+        HotkeyManager HotkeyManager;
+        NameIncrementer HotkeyNameIncrementer = new NameIncrementer("Hotkey");
+        public ObservableCollection<HotkeyObject> HotkeyObjects=new ObservableCollection<HotkeyObject>();
 
         int CurrentMacroID = 0;
 
@@ -34,7 +36,9 @@ namespace R3peat
             MainItemsRepeater.ItemsSource = MacroList;
         }
         private void NewMacro(object sender, RoutedEventArgs e) {
-            Macro newMacro = new Macro(MacroNameIncrementer.Next(),CurrentMacroID++.ToString());
+            HotkeyObject hotkeyObject= new HotkeyObject(HotkeyManager,HotkeyNameIncrementer.Next());
+            HotkeyObjects.Add(hotkeyObject);
+            Macro newMacro = new Macro(MacroNameIncrementer.Next(),CurrentMacroID++.ToString(),hotkeyObject);
             MacroList.Add(newMacro);
         }
         private void EditMacro(object sender, RoutedEventArgs e) {
