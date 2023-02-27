@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NHotkey.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,11 @@ namespace R3peat
     /// </summary>
     public partial class HotkeyEditorWindow : Window
     {
-        public HotkeyEditorWindow()
+        public HotkeyEditorModel HotkeyEditorModel;
+        public HotkeyEditorWindow(Macro macro,HotkeyManager hotkeyManager)
         {
             InitializeComponent();
+            this.HotkeyEditorModel = new HotkeyEditorModel(macro,hotkeyManager);
         }
     }
 }
