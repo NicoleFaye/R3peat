@@ -15,8 +15,31 @@ namespace R3peat
     public class HotkeyObject : NameProperty
     {
         private HotkeyManager _manager;
-        public HotkeyMode HotkeyMode { get; set; }
-        public KeyGesture KeyCombo { get; set; }
+        private HotkeyMode _hotkeyMode;
+        public HotkeyMode HotkeyMode
+        {
+            get
+            {
+                return _hotkeyMode;
+            }
+            set { 
+                _hotkeyMode= value;
+                base.onPropertyChanged("HotkeyMode");
+            }
+        }
+        private KeyGesture _keyCombo;
+        public KeyGesture KeyCombo
+        {
+            get
+            {
+                return _keyCombo;
+            }
+            set
+            {
+                _keyCombo = value;
+                base.onPropertyChanged("KeyCombo");
+            }
+        }
         public EventHandler<NHotkey.HotkeyEventArgs> Action { get; set; }
         public void Update()
         {
