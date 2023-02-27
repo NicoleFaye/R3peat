@@ -22,7 +22,7 @@ namespace R3peat
     public partial class MacroEditorWindow : Window
     {
         public MacroEditorModel MacroEditorModel;
-        public WPFCoordinateConversion Converter = new WPFCoordinateConversion();
+        public ICoordinateConversion Converter = new WPFCoordinateConversion();
         public MacroEditorWindow(Macro macro)
         {
             InitializeComponent();
