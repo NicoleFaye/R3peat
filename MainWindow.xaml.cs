@@ -33,30 +33,25 @@ namespace R3peat
             mainModel.NewMacro();
         }
         private void EditMacro(object sender, RoutedEventArgs e) {
-
-            int index = -1;
-            for (int i = 0; i < mainModel.MacroList.Count; i++) {
-                if (mainModel.MacroList[i].ID == (string)(((Button)sender).Tag))
-                {
-                    index = i;
-                }
-            }
+            int index = GetSenderMacroIndex(sender);
             if (index < 0) return;
-            
             mainModel.EditMacro(index);
         }
         private void EditHotkey(object sender, RoutedEventArgs e) {
+            int index = GetSenderMacroIndex(sender);
+            if (index < 0) return;
+            mainModel.EditHotkey(index);
+        }
+
+        private int GetSenderMacroIndex(object sender) {
             int index = -1;
             for (int i = 0; i < mainModel.MacroList.Count; i++) {
-                if (mainModel.MacroList[i].ID == (string)(((Button)sender).Tag))
+                if (mainModel.MacroList[i].ID == (string)(((Control)sender).Tag))
                 {
                     index = i;
                 }
             }
-            if (index < 0) return;
-            mainModel.EditHotkey(index);
+            return index;
         }
-            
-
     }
 }

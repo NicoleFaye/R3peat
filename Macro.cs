@@ -5,12 +5,13 @@ using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace R3peat
 {
     public class Macro : NameAndDescriptionProperty
     {
-        public ObservableCollection<Action> Actions { get; set; }= new ObservableCollection<Action>();
+        public ObservableCollection<Action> Actions { get; set; } = new ObservableCollection<Action>();
         private HotkeyObject Hotkey { get; set; }
         private bool _active;
         public bool Active
@@ -29,7 +30,7 @@ namespace R3peat
         public string ID
         {
             get
-         {
+            {
                 return _id;
             }
             set
@@ -38,17 +39,12 @@ namespace R3peat
                 base.onPropertyChanged("ID");
             }
         }
-        public Macro(string name, string id)
+        public Macro(string name, string id, HotkeyObject newHotkeyObject)
         {
             this.ID = id;
             this.Name = name;
-            this.Hotkey = null;
+            this.Hotkey = newHotkeyObject;
         }
-        public Macro(string name, string id,HotkeyObject newHotkeyObject)
-        {
-            this.ID = id;
-            this.Name = name;
-            this.Hotkey= newHotkeyObject;
-        }
+        public Macro(string name, string id) : this(name, id, null) { }
     }
 }

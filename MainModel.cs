@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NHotkey.Wpf;
+using System.Windows;
 
 namespace R3peat
 {
