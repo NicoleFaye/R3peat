@@ -87,6 +87,7 @@
       <DependentUpon>HotkeyEditorWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Macro.cs" />
+    <Compile Include="MainModel.cs" />
     <Compile Include="NameAndDescriptionProperty.cs" />
     <Compile Include="NameProperty.cs" />
     <Compile Include="NameIncrementer.cs" />
@@ -140,6 +141,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

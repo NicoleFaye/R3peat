@@ -22,51 +22,39 @@ namespace R3peat
     /// </summary>
     public partial class MainWindow : Window
     {
-        public ObservableCollection<Macro> MacroList = new ObservableCollection<Macro>();
-        NameIncrementer MacroNameIncrementer = new NameIncrementer("Macro");
-        HotkeyManager HotkeyManager;
-        NameIncrementer HotkeyNameIncrementer = new NameIncrementer("Hotkey");
-        public ObservableCollection<HotkeyObject> HotkeyObjects=new ObservableCollection<HotkeyObject>();
-
-        int CurrentMacroID = 0;
-
+        public MainModel mainModel= new MainModel();
+        
         public MainWindow()
         {
             InitializeComponent();
-            MainItemsRepeater.ItemsSource = MacroList;
+            MainItemsRepeater.ItemsSource = mainModel.MacroList;
         }
         private void NewMacro(object sender, RoutedEventArgs e) {
-            HotkeyObject hotkeyObject= new HotkeyObject(HotkeyManager,HotkeyNameIncrementer.Next());
-            HotkeyObjects.Add(hotkeyObject);
-            Macro newMacro = new Macro(MacroNameIncrementer.Next(),CurrentMacroID++.ToString(),hotkeyObject);
-            MacroList.Add(newMacro);
+            mainModel.NewMacro();
         }
         private void EditMacro(object sender, RoutedEventArgs e) {
 
             int index = -1;
-            for (int i = 0; i < MacroList.Count; i++) {
-                if (MacroList[i].ID == (string)(((Button)sender).Tag))
+            for (int i = 0; i < mainModel.MacroList.Count; i++) {
+                if (mainModel.MacroList[i].ID == (string)(((Button)sender).Tag))
                 {
                     index = i;
                 }
             }
             if (index < 0) return;
             
-            MacroEditorWindow EditorWindow = new MacroEditorWindow(MacroList[index]);
-            EditorWindow.Show();
-
+            mainModel.EditMacro(index);
         }
         private void EditHotkey(object sender, RoutedEventArgs e) {
             int index = -1;
-            for (int i = 0; i < MacroList.Count; i++) {
-                if (MacroList[i].ID == (string)(((Button)sender).Tag))
+            for (int i = 0; i < mainModel.MacroList.Count; i++) {
+                if (mainModel.MacroList[i].ID == (string)(((Button)sender).Tag))
                 {
                     index = i;
                 }
             }
             if (index < 0) return;
-            HotkeyEditorWindow EditorWindow = new HotkeyEditorWindow(MacroList[index],HotkeyManager);
-            EditorWindow.Show();
+            mainModel.EditHotkey(index);
         }
             
 
