@@ -140,6 +140,25 @@ namespace R3peat
             MacroEditorModel.ChangeActionOrderSooner(currentIndex);
             ActionList.SelectedIndex = currentIndex - 1;
         }
+        private void DeleteAction(object sender, RoutedEventArgs e) {
+            
+            int currentIndex = ActionList.SelectedIndex;
+            if (currentIndex <= 0)
+            {
+                return;
+            }
+            MacroEditorModel.DeleteAction(currentIndex);
+        }
+
+        private void DeleteMouseMovementStep(object sender, RoutedEventArgs e) {
+            int currentIndex = MouseMovementStepList.SelectedIndex;
+            MouseMovement currentMovement = (MouseMovement)ActionList.SelectedItem;
+            if (currentIndex >= currentMovement.MouseMovementSteps.Count)
+            {
+                return;
+            }
+            MacroEditorModel.DeleteMouseMovementStep(currentIndex, currentMovement.MouseMovementSteps);
+        }
         private void ChangeActionOrderLater(object sender, RoutedEventArgs e)
         {
             int currentIndex = ActionList.SelectedIndex;

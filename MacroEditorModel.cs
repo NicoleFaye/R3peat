@@ -78,6 +78,12 @@ namespace R3peat
                     break;
             }
         }
+        public void DeleteAction(int index) {
+            CurrentMacro.Actions.RemoveAt(index);
+        }
+        public void DeleteMouseMovementStep(int index, ObservableCollection<MouseMovementStep> steps) {
+            steps.RemoveAt(index);
+        }
         public void ChangeActionOrderLater(int currentIndex)
         {
             if (currentIndex + 1 >= CurrentMacro.Actions.Count)

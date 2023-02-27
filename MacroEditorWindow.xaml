@@ -21,6 +21,11 @@
             </Grid.RowDefinitions>
             <Label Content="Action List" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <ListBox x:Name="ActionList" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="OnActionListSelectionChanged" >
+                <ListBox.ContextMenu>
+                    <ContextMenu Name="ActionListContextMenu">
+                        <MenuItem Header="Delete" Click="DeleteAction" />
+                    </ContextMenu>
+                </ListBox.ContextMenu>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="0,2">
@@ -98,6 +103,11 @@
             <Label Content="Mouse Movement Step Details" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Label Grid.Row="2" Content="Mouse Movement Step List" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="1"/>
             <ListBox  SelectionChanged="OnMouseMovementStepSelectionChanged" Name="MouseMovementStepList" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Stretch" d:ItemsSource="{d:SampleData ItemCount=5}"  >
+                <ListBox.ContextMenu>
+                    <ContextMenu Name="MouseMovementStepListContextMenu">
+                        <MenuItem Header="Delete" Click="DeleteMouseMovementStep" />
+                    </ContextMenu>
+                </ListBox.ContextMenu>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="0,2">
