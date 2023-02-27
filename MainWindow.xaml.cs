@@ -57,7 +57,15 @@ namespace R3peat
 
         }
         private void EditHotkey(object sender, RoutedEventArgs e) {
-            HotkeyEditorWindow EditorWindow = new HotkeyEditorWindow();
+            int index = -1;
+            for (int i = 0; i < MacroList.Count; i++) {
+                if (MacroList[i].ID == (string)(((Button)sender).Tag))
+                {
+                    index = i;
+                }
+            }
+            if (index < 0) return;
+            HotkeyEditorWindow EditorWindow = new HotkeyEditorWindow(MacroList[index],HotkeyManager);
             EditorWindow.Show();
         }
             
