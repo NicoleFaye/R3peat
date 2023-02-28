@@ -16,14 +16,26 @@ namespace R3peat
     {
         private HotkeyManager _manager;
         private HotkeyMode _hotkeyMode;
+        private String _string;
+        public String HotkeyString
+        {
+            get { return _string; }
+            set
+            {
+                _string = value;
+                base.onPropertyChanged("HotkeyString");
+
+            }
+        }
         public HotkeyMode HotkeyMode
         {
             get
             {
                 return _hotkeyMode;
             }
-            set { 
-                _hotkeyMode= value;
+            set
+            {
+                _hotkeyMode = value;
                 base.onPropertyChanged("HotkeyMode");
             }
         }
@@ -38,6 +50,8 @@ namespace R3peat
             {
                 _keyCombo = value;
                 base.onPropertyChanged("KeyCombo");
+                base.onPropertyChanged("HotkeyString");
+                _string = KeyComboToString();
             }
         }
         public EventHandler<NHotkey.HotkeyEventArgs> Action { get; set; }
@@ -48,11 +62,25 @@ namespace R3peat
                 _manager.AddOrReplace(this.Name, KeyCombo, Action);
             }
         }
+        public String KeyComboToString()
+        {
+            
+            String output = "";
+            if (_keyCombo != null)
+            {
+                output += _keyCombo.Modifiers.ToString().Replace(", ", " + ");
+                output += " + ";
+                output += _keyCombo.Key.ToString();
+
+            }
+            return output;
+        }
         public HotkeyObject(HotkeyManager hotkeyManager, String name)
         {
             _manager = hotkeyManager;
             this.Name = name;
             Action = null;
+            KeyCombo = new KeyGesture(Key.F, ModifierKeys.Control | ModifierKeys.Shift);
         }
         public HotkeyObject(HotkeyManager hotkeyManager, String name, EventHandler<NHotkey.HotkeyEventArgs> handler)
         {
