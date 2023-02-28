@@ -43,16 +43,16 @@ namespace R3peat
             {
                 if (e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl)
                 {
-                    HotkeyEditorModel.ModifierKeys = HotkeyEditorModel.ModifierKeys | ModifierKeys.Control;
+                    HotkeyEditorModel.ModifierKeys |= ModifierKeys.Control;
                 }
                 else if (e.Key == Key.LeftAlt || e.Key == Key.RightAlt)
                 {
-                    HotkeyEditorModel.ModifierKeys = HotkeyEditorModel.ModifierKeys | ModifierKeys.Alt;
+                    HotkeyEditorModel.ModifierKeys |= ModifierKeys.Alt;
 
                 }
                 else if (e.Key == Key.LeftShift || e.Key == Key.RightShift)
                 {
-                    HotkeyEditorModel.ModifierKeys = HotkeyEditorModel.ModifierKeys | ModifierKeys.Shift;
+                    HotkeyEditorModel.ModifierKeys |=  ModifierKeys.Shift;
                 }
                 else
                 {
