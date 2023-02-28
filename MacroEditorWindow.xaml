@@ -8,13 +8,19 @@
         Title="Macro Editor" Height="450" Width="800" MinWidth="800" MinHeight="485"
         xmlns:ui="http://schemas.modernwpf.com/2019"
         ui:WindowHelper.UseModernWindowStyle="True">
-    <Grid>
+    <Grid x:Name="MacroEditorGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="35"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".5*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width=".5*"/>
+            </Grid.ColumnDefinitions>
+                <TextBox Name="MacroNameTextBox" TextWrapping="NoWrap" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.ColumnSpan="1" TextChanged="MacroNameChanged" KeyDown="LoseFocusOnEscReturn"/>
+                <Label Content="Macro Name: " HorizontalAlignment="Right" VerticalAlignment="Center"/>
         </Grid>
     <Grid Grid.Row="1">
         <Grid.ColumnDefinitions>
@@ -85,7 +91,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" Content="Pause Name: " HorizontalAlignment="Right" VerticalAlignment="Center" />
-                <TextBox Name="PauseNameTextBox" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" TextChanged="ActionNameChanged" />
+                    <TextBox KeyDown="LoseFocusOnEscReturn" Name="PauseNameTextBox" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" TextChanged="ActionNameChanged" />
                 <Label Content="Duration:" HorizontalAlignment="Right" Margin="0,0,10,0" Grid.Row="1" VerticalAlignment="Center"/>
                 <ui:NumberBox Name="PauseDurationNumberBox" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,0,0,0" Grid.Row="1" VerticalAlignment="Center" Grid.ColumnSpan="1" TextAlignment="Right" ValidationMode="InvalidInputOverwritten" ValueChanged="PauseDurationChanged"/>
                 <Label Content="ms" HorizontalAlignment="Left" Margin="2,0,0,0" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"/>
@@ -141,7 +147,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Label Grid.Row="1" Content="Mouse Movement Name: " HorizontalAlignment="Right" VerticalAlignment="Center" />
-                <TextBox Name="MouseMovementNameTextBox" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" TextChanged="ActionNameChanged"/>
+                    <TextBox KeyDown="LoseFocusOnEscReturn" Name="MouseMovementNameTextBox" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" TextChanged="ActionNameChanged"/>
             </Grid>
 
 
@@ -184,7 +190,7 @@
                 <Label Content="Pixel Y: " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2"/>
                 <Label Content="Absolute X: " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2" Grid.Row="1"/>
                 <Label Content="Absolute Y: " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2"/>
-                <TextBox Name="MouseMovementStepNameTextBox" TextWrapping="NoWrap" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.ColumnSpan="3" TextChanged="MouseMovementStepNameChanged"/>
+                    <TextBox KeyDown="LoseFocusOnEscReturn" Name="MouseMovementStepNameTextBox" TextWrapping="NoWrap" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.ColumnSpan="3" TextChanged="MouseMovementStepNameChanged"/>
                 <ui:NumberBox Name="MouseMovementStepPixelXNumberBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1"/>
                 <ui:NumberBox Name="MouseMovementStepPixelYNumberBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2"/>
                 <ui:NumberBox Name="MouseMovementStepAbsoluteXNumberBox" ValueChanged="MouseMovementStepAbsoluteXChanged" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="3" Grid.Row="1"/>
