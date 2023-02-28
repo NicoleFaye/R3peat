@@ -29,7 +29,7 @@ namespace R3peat
             
             
             this.MacroEditorModel = new MacroEditorModel(macro);
-
+            this.MacroNameTextBox.Text = macro.Name;
 
             ActionList.ItemsSource = MacroEditorModel.CurrentMacro.Actions;
             NewActionTypeComboBox.ItemsSource = Enum.GetValues(typeof(ActionType));
@@ -73,6 +73,15 @@ namespace R3peat
             {
                 ((Pause)ActionList.SelectedItem).Duration = (int)_sender.Value;
             }
+        }
+        private void MacroNameChanged(object sender, TextChangedEventArgs e) { 
+            TextBox _sender = (TextBox)sender;
+            if (_sender.Text == "")
+            {
+                MacroEditorModel.CurrentMacro.Name = "Macro";
+                return;
+            }
+            MacroEditorModel.CurrentMacro.Name= _sender.Text;
         }
         private void ActionNameChanged(object sender, TextChangedEventArgs e)
         {
@@ -253,5 +262,12 @@ namespace R3peat
             MouseMovementStepList.SelectedIndex = currentIndex + 1;
         }
 
+        private void LoseFocusOnEscReturn(object sender, KeyEventArgs e)
+        {
+            if(e.Key== Key.Escape ||e.Key==Key.Return)
+            {
+                Keyboard.ClearFocus();
+            }
+        }
     }
 }
