@@ -28,7 +28,12 @@
                         <ui:UniformGridLayout/>
                     </ui:ItemsRepeater.Layout>
                     <DataTemplate DataType="Macro">
-                        <Border CornerRadius="5" Background="SlateGray"  Width="379" Height="100" Margin="10,10,10,10" HorizontalAlignment="Center" >
+                        <Border  CornerRadius="5" Background="SlateGray"  Width="379" Height="100" Margin="10,10,10,10" HorizontalAlignment="Center" >
+                            <Border.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Tag="{Binding ID}"  Header="Delete" Click="DeleteMacro"/>
+                                </ContextMenu>
+                            </Border.ContextMenu>
                             <Grid >
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>

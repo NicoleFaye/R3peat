@@ -43,6 +43,12 @@ namespace R3peat
             mainModel.EditHotkey(index);
         }
 
+        private void DeleteMacro(object sender, RoutedEventArgs e) {
+            int index = GetSenderMacroIndex(sender);
+            if (index < 0) return;
+            mainModel.DeleteMacro(index);
+        }
+
         private int GetSenderMacroIndex(object sender) {
             int index = -1;
             for (int i = 0; i < mainModel.MacroList.Count; i++) {

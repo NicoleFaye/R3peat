@@ -38,7 +38,9 @@ namespace R3peat
         {
             MacroEditorWindow EditorWindow = new MacroEditorWindow(MacroList[index]);
             EditorWindow.Show();
-
+        }
+        public void DeleteMacro(int index) { 
+            MacroList.RemoveAt(index);
         }
         public void EditHotkey(int index)
         {
