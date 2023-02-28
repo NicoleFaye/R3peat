@@ -8,7 +8,7 @@
         Title="HotkeyEditorWindow" Height="176" Width="475"
         xmlns:ui="http://schemas.modernwpf.com/2019"
         ui:WindowHelper.UseModernWindowStyle="True">
-    <Grid >
+    <Grid KeyDown="Grid_KeyDown" KeyUp="Grid_KeyUp">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -29,5 +29,7 @@
                 <ComboBox Name="ModeComboBox" Width="120" Height="31"/>
             </StackPanel>
         </Grid>
+        <Label Name="HotkeyDisplayLabel" Grid.Row="0" Grid.Column="1" Content="Test" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
+        <Button Click="ToggleHotkeyUpdate" x:Name="ChangeHotkeyButton" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
     </Grid>
 </Window>

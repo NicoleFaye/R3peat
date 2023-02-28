@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using NHotkey.Wpf;
 using System.Windows.Input;
+using System.Windows.Threading;
+using System.Collections;
 
 namespace R3peat
 {
@@ -14,7 +16,22 @@ namespace R3peat
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public Key Key { get; set; }
+        public ModifierKeys ModifierKeys { get; set; }
         public Macro CurrentMacro;
+        private DispatcherTimer _timer;
+        private Boolean _updating;
+
+        public Boolean Updating {
+            get { 
+                return _updating;
+            }
+            set
+            {
+                _updating = value;
+                NotifyPropertyChanged("Updating");
+            }
+        }
         private void NotifyPropertyChanged(string info)
         {
             if (PropertyChanged != null)
@@ -22,10 +39,20 @@ namespace R3peat
                 PropertyChanged(this, new PropertyChangedEventArgs(info));
             }
         }
-
         public HotkeyEditorModel(Macro macro, HotkeyManager hotkeyManager) {
             this.CurrentMacro = macro;
-        
+        }
+        public String ToggleHotkeyUpdate() {
+            string output;
+            if (Updating)
+            {
+                output= "Change";
+            }
+            else { 
+                output= "Finish";
+            }
+            Updating = !Updating;
+            return output;
         }
         KeyGesture GetKeyCombo()
         {
@@ -49,31 +76,39 @@ namespace R3peat
             modifierKeys.Concat(ctrlKeys);
             modifierKeys.Concat(altKeys);
 
+            Key key = Key.None;
+            ModifierKeys modifiers = ModifierKeys.None;
+
             foreach (Key k in keys)
             {
-                if (Keyboard.IsKeyDown(k) && keyCombo == null)
+                if (k == Key.None) continue;
+                if (Keyboard.IsKeyDown(k) )
                 {
-                    keyCombo = new KeyGesture(k);
-                }
-                else if (Keyboard.IsKeyDown(k) && keyCombo != null)
-                {
-                    if (modifierKeys.Contains(k) && keyCombo.Key != k)
+                    if (modifierKeys.Contains(k))
                     {
                         if (altKeys.Contains(k))
                         {
-                            keyCombo = new KeyGesture(keyCombo.Key, keyCombo.Modifiers | ModifierKeys.Alt);
+                            modifiers = modifiers|ModifierKeys.Alt;
                         }
                         else if (shiftKeys.Contains(k))
                         {
-                            keyCombo = new KeyGesture(keyCombo.Key, keyCombo.Modifiers | ModifierKeys.Shift);
+                            modifiers = modifiers|ModifierKeys.Shift;
                         }
                         else if (ctrlKeys.Contains(k))
                         {
-                            keyCombo = new KeyGesture(keyCombo.Key, keyCombo.Modifiers | ModifierKeys.Control);
+                            modifiers = modifiers|ModifierKeys.Control;
                         }
+                    }
+                    else
+                    {
+                        key= k;
                     }
                 }
             }
+            if(key!=Key.None && modifiers!=ModifierKeys.None)
+                keyCombo = new KeyGesture(key, modifiers);
+            else
+                keyCombo = null;
             return keyCombo;
         }
     }
