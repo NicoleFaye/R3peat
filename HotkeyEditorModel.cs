@@ -50,6 +50,11 @@ namespace R3peat
             }
             else { 
                 output= "Finish";
+                if (this.Key != Key.None && this.ModifierKeys != ModifierKeys.None)
+                {
+                    //TODO make sure its not registered and if it is, increment
+                    CurrentMacro.Hotkey.KeyCombo = new KeyGesture(this.Key, this.ModifierKeys);
+                }
             }
             Updating = !Updating;
             return output;
