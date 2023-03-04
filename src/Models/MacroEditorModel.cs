@@ -16,20 +16,23 @@ namespace R3peat
 
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        
+
         public Macro CurrentMacro;
         private InputSimulator input = new InputSimulator();
         protected MouseMovementBuilder MouseMovementBuilder;
         protected PauseBuilder PauseBuilder;
         private Visibility mouseMovementEditorGridVisibility;
-        
+
         public Key Key { get; set; }
         public ModifierKeys ModifierKeys { get; set; }
         private DispatcherTimer _timer;
         private Boolean _updating;
+        public Key[] PossibleModifiers { get; set; }
 
-        public Boolean Updating {
-            get { 
+        public Boolean Updating
+        {
+            get
+            {
                 return _updating;
             }
             set
@@ -59,7 +62,7 @@ namespace R3peat
             }
             set
             {
-                pauseEditorGridVisibility= value;
+                pauseEditorGridVisibility = value;
                 NotifyPropertyChanged("PauseEditorGridVisibility");
             }
         }
@@ -71,27 +74,43 @@ namespace R3peat
             }
         }
 
-        public MacroEditorModel(Macro macro) { 
+        public MacroEditorModel(Macro macro)
+        {
             this.CurrentMacro = macro;
             MouseMovementBuilder = new MouseMovementBuilder(input);
             PauseBuilder = new PauseBuilder();
             MouseMovementEditorGridVisibility = Visibility.Hidden;
             PauseEditorGridVisibility = Visibility.Hidden;
-        }
-
-        public String ToggleHotkeyUpdate() {
-            string output;
-            if (Updating)
+            PossibleModifiers = new Key[]
             {
-                output= "Change";
-                if (this.Key != Key.None && this.ModifierKeys != ModifierKeys.None)
+                Key.LeftAlt, Key.RightAlt,
+                Key.LeftShift, Key.RightShift,
+                Key.LeftCtrl, Key.RightCtrl,
+            };
+        }
+        public void UpdateKeyCombo()
+        {
+
+            if (this.Key != Key.None && this.Key != Key.System && this.ModifierKeys != ModifierKeys.None)
+            {
+                if (!(CurrentMacro.Hotkey.KeyCombo.Key == this.Key && CurrentMacro.Hotkey.KeyCombo.Modifiers == this.ModifierKeys))
                 {
                     //TODO make sure its not registered and if it is, increment
                     CurrentMacro.Hotkey.KeyCombo = new KeyGesture(this.Key, this.ModifierKeys);
                 }
             }
-            else { 
-                output= "Finish";
+        }
+
+        public String ToggleHotkeyUpdate()
+        {
+            string output;
+            if (Updating)
+            {
+                output = "Change";
+            }
+            else
+            {
+                output = "Finish";
             }
             Updating = !Updating;
             return output;
@@ -113,10 +132,12 @@ namespace R3peat
                     break;
             }
         }
-        public void DeleteAction(int index) {
+        public void DeleteAction(int index)
+        {
             CurrentMacro.Actions.RemoveAt(index);
         }
-        public void DeleteMouseMovementStep(int index, ObservableCollection<MouseMovementStep> steps) {
+        public void DeleteMouseMovementStep(int index, ObservableCollection<MouseMovementStep> steps)
+        {
             steps.RemoveAt(index);
         }
         public void ChangeActionOrderLater(int currentIndex)
@@ -139,13 +160,14 @@ namespace R3peat
             CurrentMacro.Actions[currentIndex - 1] = CurrentMacro.Actions[currentIndex];
             CurrentMacro.Actions[currentIndex] = swap;
         }
-        public void ChangeStepOrderSooner(int index , ObservableCollection<MouseMovementStep> steps) {
+        public void ChangeStepOrderSooner(int index, ObservableCollection<MouseMovementStep> steps)
+        {
             if (index <= 0) return;
-            MouseMovementStep swap = steps[index-1];
-            steps[index-1] = steps[index];
+            MouseMovementStep swap = steps[index - 1];
+            steps[index - 1] = steps[index];
             steps[index] = swap;
         }
-        public void ChangeStepOrderLater(int index,ObservableCollection<MouseMovementStep> steps)
+        public void ChangeStepOrderLater(int index, ObservableCollection<MouseMovementStep> steps)
         {
             if (index + 1 >= steps.Count) return;
             MouseMovementStep swap = steps[index + 1];

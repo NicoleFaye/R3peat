@@ -93,12 +93,13 @@ namespace R3peat
                 {
                     MacroEditorModel.Key = e.Key;
                 }
+                MacroEditorModel.UpdateKeyCombo();
             }
         }
 
         private void Grid_KeyUp(object sender, KeyEventArgs e)
         {
-            if (MacroEditorModel.Updating)
+            if (MacroEditorModel.Updating && MacroEditorModel.PossibleModifiers.Contains(e.Key))
             {
                 if (e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl)
                 {
@@ -125,7 +126,7 @@ namespace R3peat
                         MacroEditorModel.ModifierKeys &= ~ModifierKeys.Shift;
                     }
                 }
-
+                //MacroEditorModel.UpdateKeyCombo();
             }
 
         }
