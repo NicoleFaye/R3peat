@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:R3peat"
         mc:Ignorable="d"
-        Title="R3peat" Height="450" Width="800"
+        Title="R3peat" Height="450" Width="650"
         xmlns:ui="http://schemas.modernwpf.com/2019"
         ui:WindowHelper.UseModernWindowStyle="True">
     <Window.Resources>
@@ -28,7 +28,7 @@
                         <ui:UniformGridLayout/>
                     </ui:ItemsRepeater.Layout>
                     <DataTemplate DataType="Macro">
-                        <Border  CornerRadius="5" Background="SlateGray"  Width="379" Height="100" Margin="10,10,10,10" HorizontalAlignment="Center" >
+                        <Border  CornerRadius="5" Background="SlateGray"  Width="300" Height="50" Margin="10,10,10,10" HorizontalAlignment="Center" >
                             <Border.ContextMenu>
                                 <ContextMenu>
                                     <MenuItem Tag="{Binding ID}"  Header="Delete" Click="DeleteMacro"/>
@@ -37,15 +37,15 @@
                             <Grid >
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
                                     <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width=".5*"/>
                                 </Grid.ColumnDefinitions>
                                 <Label Content="{Binding Name}" Tag="{Binding ID}" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
                                 <ui:ToggleSwitch Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" IsOn="{Binding Active}"/>
-                                <Button Content="Edit Macro" Tag="{Binding ID}" Click="EditMacro" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+                                <Button Content="Edit" Tag="{Binding ID}" Click="EditMacro" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
 
                             </Grid>
                         </Border>
