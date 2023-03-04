@@ -37,11 +37,6 @@ namespace R3peat
             if (index < 0) return;
             mainModel.EditMacro(index);
         }
-        private void EditHotkey(object sender, RoutedEventArgs e) {
-            int index = GetSenderMacroIndex(sender);
-            if (index < 0) return;
-            mainModel.EditHotkey(index);
-        }
 
         private void DeleteMacro(object sender, RoutedEventArgs e) {
             int index = GetSenderMacroIndex(sender);

@@ -42,10 +42,5 @@ namespace R3peat
         public void DeleteMacro(int index) { 
             MacroList.RemoveAt(index);
         }
-        public void EditHotkey(int index)
-        {
-            HotkeyEditorWindow EditorWindow = new HotkeyEditorWindow(MacroList[index], HotkeyManager);
-            EditorWindow.Show();
-        }
     }
 }

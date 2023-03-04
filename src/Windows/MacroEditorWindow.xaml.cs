@@ -61,6 +61,68 @@ namespace R3peat
             }
 
         }
+        private void ToggleHotkeyUpdate(object sender, RoutedEventArgs e)
+        {
+            ChangeHotkeyButton.Content = MacroEditorModel.ToggleHotkeyUpdate();
+        }
+
+        private void Grid_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (MacroEditorModel.Updating)
+            {
+                if (e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl)
+                {
+                    MacroEditorModel.ModifierKeys |= ModifierKeys.Control;
+                }
+                else if (e.Key == Key.LeftAlt || e.Key == Key.RightAlt)
+                {
+                    MacroEditorModel.ModifierKeys |= ModifierKeys.Alt;
+
+                }
+                else if (e.Key == Key.LeftShift || e.Key == Key.RightShift)
+                {
+                    MacroEditorModel.ModifierKeys |= ModifierKeys.Shift;
+                }
+                else
+                {
+                    MacroEditorModel.Key = e.Key;
+                }
+            }
+        }
+
+        private void Grid_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (MacroEditorModel.Updating)
+            {
+                if (e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl)
+                {
+                    if (MacroEditorModel.ModifierKeys.HasFlag(ModifierKeys.Shift)
+                        || MacroEditorModel.ModifierKeys.HasFlag(ModifierKeys.Alt))
+                    {
+                        MacroEditorModel.ModifierKeys &= ~ModifierKeys.Control;
+                    }
+                }
+                else if (e.Key == Key.LeftAlt || e.Key == Key.RightAlt)
+                {
+
+                    if (MacroEditorModel.ModifierKeys.HasFlag(ModifierKeys.Shift)
+                        || MacroEditorModel.ModifierKeys.HasFlag(ModifierKeys.Control))
+                    {
+                        MacroEditorModel.ModifierKeys &= ~ModifierKeys.Alt;
+                    }
+                }
+                else if (e.Key == Key.LeftShift || e.Key == Key.RightShift)
+                {
+                    if (MacroEditorModel.ModifierKeys.HasFlag(ModifierKeys.Alt)
+                        || MacroEditorModel.ModifierKeys.HasFlag(ModifierKeys.Control))
+                    {
+                        MacroEditorModel.ModifierKeys &= ~ModifierKeys.Shift;
+                    }
+                }
+
+            }
+
+        }
         private void PauseDurationChanged(NumberBox sender, NumberBoxValueChangedEventArgs e)
         {
             NumberBox _sender = sender;

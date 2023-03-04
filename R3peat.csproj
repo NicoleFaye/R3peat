@@ -70,56 +70,49 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Action.cs" />
+    <Compile Include="src\Actions\Action.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ActionType.cs" />
+    <Compile Include="src\Actions\ActionType.cs" />
     <Page Include="DesignTimeResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Compile Include="HotkeyEditorModel.cs" />
-    <Compile Include="HotkeyMode.cs" />
-    <Compile Include="HotkeyObject.cs" />
-    <Compile Include="HotkeyEditorWindow.xaml.cs">
-      <DependentUpon>HotkeyEditorWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Macro.cs" />
-    <Compile Include="MainModel.cs" />
-    <Compile Include="NameAndDescriptionProperty.cs" />
-    <Compile Include="NameProperty.cs" />
-    <Compile Include="NameIncrementer.cs" />
-    <Compile Include="NumberBoxIntegerFormatter.cs" />
-    <Compile Include="MacroEditorModel.cs" />
-    <Compile Include="ICoordinateConversion.cs" />
-    <Compile Include="PauseBuilder.cs" />
-    <Compile Include="Pause.cs" />
-    <Compile Include="MacroEditorWindow.xaml.cs">
+    <Compile Include="src\Incrementers\HotkeyIncrementer.cs" />
+    <Compile Include="src\HotkeyMode.cs" />
+    <Compile Include="src\HotkeyObject.cs" />
+    <Compile Include="src\Macro.cs" />
+    <Compile Include="src\Models\MainModel.cs" />
+    <Compile Include="src\NameAndDescriptionProperty.cs" />
+    <Compile Include="src\NameProperty.cs" />
+    <Compile Include="src\Incrementers\NameIncrementer.cs" />
+    <Compile Include="src\NumberBoxIntegerFormatter.cs" />
+    <Compile Include="src\Models\MacroEditorModel.cs" />
+    <Compile Include="src\Conversion\ICoordinateConversion.cs" />
+    <Compile Include="src\Actions\Pause\PauseBuilder.cs" />
+    <Compile Include="src\Actions\Pause\Pause.cs" />
+    <Compile Include="src\Windows\MacroEditorWindow.xaml.cs">
       <DependentUpon>MacroEditorWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="src\Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WPFCoordinateConversion.cs" />
-    <Page Include="HotkeyEditorWindow.xaml">
+    <Compile Include="src\Conversion\WPFCoordinateConversion.cs" />
+    <Page Include="src\Windows\MacroEditorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MacroEditorWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="src\Windows\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MouseMovement.cs" />
-    <Compile Include="MouseMovementBuilder.cs" />
-    <Compile Include="MouseMovementStep.cs" />
+    <Compile Include="src\Actions\MouseMovement\MouseMovement.cs" />
+    <Compile Include="src\Actions\MouseMovement\MouseMovementBuilder.cs" />
+    <Compile Include="src\Actions\MouseMovement\MouseMovementStep.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

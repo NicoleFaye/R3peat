@@ -7,6 +7,8 @@ using System.ComponentModel;
 using System.Collections.ObjectModel;
 using WindowsInput;
 using System.Windows;
+using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace R3peat
 {
@@ -20,6 +22,21 @@ namespace R3peat
         protected PauseBuilder PauseBuilder;
         private Visibility mouseMovementEditorGridVisibility;
         
+        public Key Key { get; set; }
+        public ModifierKeys ModifierKeys { get; set; }
+        private DispatcherTimer _timer;
+        private Boolean _updating;
+
+        public Boolean Updating {
+            get { 
+                return _updating;
+            }
+            set
+            {
+                _updating = value;
+                NotifyPropertyChanged("Updating");
+            }
+        }
         public Visibility MouseMovementEditorGridVisibility
         {
             get
@@ -61,6 +78,23 @@ namespace R3peat
             PauseEditorGridVisibility = Visibility.Hidden;
         }
 
+        public String ToggleHotkeyUpdate() {
+            string output;
+            if (Updating)
+            {
+                output= "Change";
+            }
+            else { 
+                output= "Finish";
+                if (this.Key != Key.None && this.ModifierKeys != ModifierKeys.None)
+                {
+                    //TODO make sure its not registered and if it is, increment
+                    CurrentMacro.Hotkey.KeyCombo = new KeyGesture(this.Key, this.ModifierKeys);
+                }
+            }
+            Updating = !Updating;
+            return output;
+        }
 
         public void AddNewAction(ActionType type)
         {
