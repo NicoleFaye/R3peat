@@ -50,8 +50,7 @@ namespace R3peat
             {
                 _keyCombo = value;
                 base.onPropertyChanged("KeyCombo");
-                base.onPropertyChanged("HotkeyString");
-                _string = KeyComboToString();
+                this.HotkeyString = KeyComboToString();
             }
         }
         public EventHandler<NHotkey.HotkeyEventArgs> Action { get; set; }

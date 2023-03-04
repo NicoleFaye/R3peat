@@ -16,6 +16,7 @@ namespace R3peat
 
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        
         public Macro CurrentMacro;
         private InputSimulator input = new InputSimulator();
         protected MouseMovementBuilder MouseMovementBuilder;
@@ -83,14 +84,14 @@ namespace R3peat
             if (Updating)
             {
                 output= "Change";
-            }
-            else { 
-                output= "Finish";
                 if (this.Key != Key.None && this.ModifierKeys != ModifierKeys.None)
                 {
                     //TODO make sure its not registered and if it is, increment
                     CurrentMacro.Hotkey.KeyCombo = new KeyGesture(this.Key, this.ModifierKeys);
                 }
+            }
+            else { 
+                output= "Finish";
             }
             Updating = !Updating;
             return output;

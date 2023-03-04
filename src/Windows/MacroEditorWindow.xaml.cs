@@ -47,6 +47,12 @@ namespace R3peat
             MouseMovementVisibilityBinding.Source = MacroEditorModel;
             MouseMovementEditorGrid.SetBinding(Grid.VisibilityProperty, MouseMovementVisibilityBinding);
 
+            Binding HotkeyDisplayBinding = new Binding("HotkeyString");
+            HotkeyDisplayBinding.Source = this.MacroEditorModel.CurrentMacro.Hotkey;
+            HotkeyDisplayLabel.SetBinding(Label.ContentProperty, HotkeyDisplayBinding);
+            
+            
+            ChangeHotkeyButton.Content = "Change";
         }
         private void PauseNameChanged(object sender, TextChangedEventArgs e)
         {
