@@ -85,10 +85,12 @@ namespace R3peat
                     MacroEditorModel.ModifierKeys |= ModifierKeys.Alt;
 
                 }
+                /*
                 else if (e.Key == Key.LeftShift || e.Key == Key.RightShift)
                 {
                     MacroEditorModel.ModifierKeys |= ModifierKeys.Shift;
                 }
+                */
                 else
                 {
                     MacroEditorModel.Key = e.Key;
@@ -118,6 +120,7 @@ namespace R3peat
                         MacroEditorModel.ModifierKeys &= ~ModifierKeys.Alt;
                     }
                 }
+                /*
                 else if (e.Key == Key.LeftShift || e.Key == Key.RightShift)
                 {
                     if (MacroEditorModel.ModifierKeys.HasFlag(ModifierKeys.Alt)
@@ -126,7 +129,8 @@ namespace R3peat
                         MacroEditorModel.ModifierKeys &= ~ModifierKeys.Shift;
                     }
                 }
-                //MacroEditorModel.UpdateKeyCombo();
+                */
+                MacroEditorModel.UpdateKeyCombo();
             }
 
         }
