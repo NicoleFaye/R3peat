@@ -80,6 +80,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Compile Include="src\Actions\ButtonPress.cs" />
+    <Compile Include="src\Actions\MouseButton.cs" />
+    <Compile Include="src\Actions\TextEntry.cs" />
     <Compile Include="src\Incrementers\HotkeyIncrementer.cs" />
     <Compile Include="src\HotkeyMode.cs" />
     <Compile Include="src\HotkeyObject.cs" />
