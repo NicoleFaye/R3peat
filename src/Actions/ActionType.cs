@@ -10,5 +10,8 @@ namespace R3peat
     {
         MouseMovement,
         Pause,
+        MouseButton,
+        ButtonPress,
+        TextEntry,
     }
 }
