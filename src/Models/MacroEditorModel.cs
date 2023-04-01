@@ -93,7 +93,7 @@ namespace R3peat
 
             if (this.Key != Key.None && this.Key != Key.System && this.ModifierKeys != ModifierKeys.None)
             {
-                if (!(CurrentMacro.Hotkey.KeyCombo.Key == this.Key && CurrentMacro.Hotkey.KeyCombo.Modifiers == this.ModifierKeys))
+                if (CurrentMacro.Hotkey.KeyCombo.Key != this.Key || CurrentMacro.Hotkey.KeyCombo.Modifiers != this.ModifierKeys)
                 {
                     //TODO make sure its not registered and if it is, increment
                     CurrentMacro.Hotkey.KeyCombo = new KeyGesture(this.Key, this.ModifierKeys);
