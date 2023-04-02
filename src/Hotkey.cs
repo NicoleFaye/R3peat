@@ -1,5 +1,6 @@
 ﻿using R3peat;
 using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -17,7 +18,7 @@ namespace R3peat
         private Key _key;
         private ModifierKeys _modifierKeys;
         private bool _isRegistered;
-        private Action _action;
+        public ObservableCollection<Action> Actions { get; set; } = new ObservableCollection<Action>();
 
         public Key Key
         {
@@ -58,18 +59,6 @@ namespace R3peat
             }
         }
 
-        public Action Action
-        {
-            get => _action;
-            set
-            {
-                if (_action != value)
-                {
-                    _action = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
 
         public Hotkey(Key key = Key.None, ModifierKeys modifierKeys = ModifierKeys.None, HotkeyMode hotkeyMode = HotkeyMode.SingleExecution)
         {
@@ -156,7 +145,9 @@ namespace R3peat
 
         protected virtual void OnHotkeyPressed()
         {
-            Action.Run();
+            foreach (Action a in this.Actions) {
+                a.Run();
+            }
         }
 
         [DllImport("user32.dll")]

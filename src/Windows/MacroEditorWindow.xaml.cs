@@ -31,7 +31,7 @@ namespace R3peat
             this.MacroEditorModel = new MacroEditorModel(macro);
             this.MacroNameTextBox.Text = macro.Name;
 
-            ActionList.ItemsSource = MacroEditorModel.CurrentMacro.Actions;
+            ActionList.ItemsSource = MacroEditorModel.CurrentMacro.Hotkey.Actions;
             NewActionTypeComboBox.ItemsSource = Enum.GetValues(typeof(ActionType));
 
             NumberBoxIntegerFormatter numberBoxIntegerFormatter = new NumberBoxIntegerFormatter();
@@ -227,7 +227,7 @@ namespace R3peat
         private void ChangeActionOrderLater(object sender, RoutedEventArgs e)
         {
             int currentIndex = ActionList.SelectedIndex;
-            if (currentIndex >= MacroEditorModel.CurrentMacro.Actions.Count)
+            if (currentIndex >= MacroEditorModel.CurrentMacro.Hotkey.Actions.Count)
             {
                 return;
             }
