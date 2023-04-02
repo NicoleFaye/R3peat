@@ -91,17 +91,20 @@ namespace R3peat
         public void UpdateKeyCombo()
         {
 
-            //TODO
-            /*
-            if (this.Key != Key.None && this.Key != Key.System && this.ModifierKeys != ModifierKeys.None)
+            if (this.Key != Key.None && this.Key != Key.System)
             {
-                if (CurrentMacro.Hotkey.KeyCombo.Key != this.Key || CurrentMacro.Hotkey.KeyCombo.Modifiers != this.ModifierKeys)
+                if (CurrentMacro.Hotkey.Key != this.Key || CurrentMacro.Hotkey.ModifierKeys != this.ModifierKeys)
                 {
-                    //TODO make sure its not registered and if it is, increment
-                    CurrentMacro.Hotkey.KeyCombo = new KeyGesture(this.Key, this.ModifierKeys);
+                    CurrentMacro.Hotkey.Key = this.Key;
+                    CurrentMacro.Hotkey.ModifierKeys= this.ModifierKeys;
+                    if (CurrentMacro.Hotkey.Register())
+                    {
+                        Console.WriteLine("Registered Hotkey: "+CurrentMacro.Hotkey.ToString());
+                    }
+                    else { 
+                    }
                 }
             }
-            */
         }
 
         public String ToggleHotkeyUpdate()

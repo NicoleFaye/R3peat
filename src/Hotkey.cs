@@ -29,6 +29,7 @@ namespace R3peat
                 {
                     _key = value;
                     OnPropertyChanged();
+                    UpdateHotkeyString();
                 }
             }
         }
@@ -42,6 +43,7 @@ namespace R3peat
                 {
                     _modifierKeys = value;
                     OnPropertyChanged();
+                    UpdateHotkeyString();
                 }
             }
         }
@@ -59,7 +61,10 @@ namespace R3peat
             }
         }
 
-
+        private void UpdateHotkeyString()
+        {
+            HotkeyString = ToString();
+        }
         public Hotkey(Key key = Key.None, ModifierKeys modifierKeys = ModifierKeys.None, HotkeyMode hotkeyMode = HotkeyMode.SingleExecution)
         {
             Key = key;
@@ -145,7 +150,8 @@ namespace R3peat
 
         protected virtual void OnHotkeyPressed()
         {
-            foreach (Action a in this.Actions) {
+            foreach (Action a in this.Actions)
+            {
                 a.Run();
             }
         }
