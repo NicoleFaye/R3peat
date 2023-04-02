@@ -10,16 +10,79 @@ namespace R3peat
 {
     public class Hotkey : INotifyPropertyChanged, IDisposable
     {
-        private readonly Window _window;
         private readonly IntPtr _hWnd;
         private readonly int _id;
         private string _hotkeyString;
         private HotkeyMode _hotkeyMode;
+        private Key _key;
+        private ModifierKeys _modifierKeys;
+        private bool _isRegistered;
+        private Action _action;
 
-        public Key Key { get; }
-        public ModifierKeys ModifierKeys { get; }
-        public bool IsRegistered { get; private set; }
-        public Action Action { get; set; }
+        public Key Key
+        {
+            get => _key;
+            set
+            {
+                if (_key != value)
+                {
+                    _key = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public ModifierKeys ModifierKeys
+        {
+            get => _modifierKeys;
+            set
+            {
+                if (_modifierKeys != value)
+                {
+                    _modifierKeys = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public bool IsRegistered
+        {
+            get => _isRegistered;
+            private set
+            {
+                if (_isRegistered != value)
+                {
+                    _isRegistered = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public Action Action
+        {
+            get => _action;
+            set
+            {
+                if (_action != value)
+                {
+                    _action = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public Hotkey(Key key = Key.None, ModifierKeys modifierKeys = ModifierKeys.None, HotkeyMode hotkeyMode = HotkeyMode.SingleExecution)
+        {
+            Key = key;
+            ModifierKeys = modifierKeys;
+            _id = GetHashCode();
+            _hWnd = new WindowInteropHelper(Application.Current.MainWindow).Handle;
+            HotkeyMode = hotkeyMode;
+            HotkeyString = ToString();
+
+            var source = HwndSource.FromHwnd(_hWnd);
+            source.AddHook(WndProc);
+        }
 
         public string HotkeyString
         {
@@ -47,19 +110,6 @@ namespace R3peat
             }
         }
 
-        public Hotkey(Window window, Key key, ModifierKeys modifierKeys, HotkeyMode hotkeyMode)
-        {
-            _window = window;
-            Key = key;
-            ModifierKeys = modifierKeys;
-            _id = GetHashCode();
-            _hWnd = new WindowInteropHelper(window).Handle;
-            HotkeyMode = hotkeyMode;
-            HotkeyString = ToString();
-
-            var source = HwndSource.FromHwnd(_hWnd);
-            source.AddHook(WndProc);
-        }
 
         public bool Register()
         {
@@ -115,26 +165,6 @@ namespace R3peat
         [DllImport("user32.dll")]
         private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
 
-        public static bool IsHotkeyRegistered(Key key, ModifierKeys modifierKeys)
-        {
-            int virtualKeyCode = KeyInterop.VirtualKeyFromKey(key);
-            uint fsModifiers = (uint)modifierKeys;
-
-            int tempId = -1; // Temporary ID for testing registration
-            IntPtr hWnd = new WindowInteropHelper(Application.Current.MainWindow).Handle;
-
-            bool isRegistered = RegisterHotKey(hWnd, tempId, fsModifiers, (uint)virtualKeyCode);
-
-
-
-            if (isRegistered)
-            {
-                // Unregister the hotkey since it was only for testing purposes
-                UnregisterHotKey(hWnd, tempId);
-            }
-
-            return isRegistered;
-        }
 
         public override string ToString()
         {

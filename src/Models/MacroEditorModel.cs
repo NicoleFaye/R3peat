@@ -91,6 +91,8 @@ namespace R3peat
         public void UpdateKeyCombo()
         {
 
+            //TODO
+            /*
             if (this.Key != Key.None && this.Key != Key.System && this.ModifierKeys != ModifierKeys.None)
             {
                 if (CurrentMacro.Hotkey.KeyCombo.Key != this.Key || CurrentMacro.Hotkey.KeyCombo.Modifiers != this.ModifierKeys)
@@ -99,6 +101,7 @@ namespace R3peat
                     CurrentMacro.Hotkey.KeyCombo = new KeyGesture(this.Key, this.ModifierKeys);
                 }
             }
+            */
         }
 
         public String ToggleHotkeyUpdate()

@@ -12,8 +12,8 @@ namespace R3peat
     public class Macro : NameAndDescriptionProperty
     {
         public ObservableCollection<Action> Actions { get; set; } = new ObservableCollection<Action>();
-        private HotkeyObject _Hotkey;
-        public HotkeyObject Hotkey { get {
+        private Hotkey _Hotkey;
+        public Hotkey Hotkey { get {
                 return _Hotkey;
             } set {
                 _Hotkey = value;
@@ -46,11 +46,11 @@ namespace R3peat
                 base.onPropertyChanged("ID");
             }
         }
-        public Macro(string name, string id, HotkeyObject newHotkeyObject)
+        public Macro(string name, string id, Hotkey newHotkey)
         {
             this.ID = id;
             this.Name = name;
-            this.Hotkey = newHotkeyObject;
+            this.Hotkey = newHotkey;
         }
         public Macro(string name, string id) : this(name, id, null) { }
     }
