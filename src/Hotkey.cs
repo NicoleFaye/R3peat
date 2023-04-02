@@ -7,6 +7,9 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
+using WindowsInput.Native;
+using WindowsInput;
+
 namespace R3peat
 {
     public class Hotkey : INotifyPropertyChanged, IDisposable
@@ -19,6 +22,26 @@ namespace R3peat
         private ModifierKeys _modifierKeys;
         private bool _isRegistered;
         public ObservableCollection<Action> Actions { get; set; } = new ObservableCollection<Action>();
+        private bool _active;
+        public bool Active
+        {
+            get
+            {
+                return _active;
+            }
+            set
+            {
+                _active = value;
+                if (_active)
+                {
+                    this.Register();
+                }
+                else {
+                    this.Unregister();
+                }
+                OnPropertyChanged();
+            }
+        }
 
         public Key Key
         {
@@ -137,19 +160,35 @@ namespace R3peat
 
         private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
+            
             const int WM_HOTKEY = 0x0312;
 
-            if (msg == WM_HOTKEY && wParam.ToInt32() == _id)
+            if (msg == WM_HOTKEY && wParam.ToInt32() == _id && this.Active)
             {
                 OnHotkeyPressed();
+                Console.WriteLine("HotkeyPressed");
                 handled = true;
             }
-
             return IntPtr.Zero;
         }
 
         protected virtual void OnHotkeyPressed()
         {
+            //pass the key press hopefully
+            InputSimulator inputSimulator = new InputSimulator();
+            this.Unregister();
+            if (ModifierKeys == ModifierKeys.None)
+            {
+                inputSimulator.Keyboard.KeyPress((VirtualKeyCode)KeyInterop.VirtualKeyFromKey(Key));
+            }
+            else if (ModifierKeys == ModifierKeys.Shift)
+            {
+                inputSimulator.Keyboard.KeyDown(VirtualKeyCode.SHIFT);
+                inputSimulator.Keyboard.KeyPress((VirtualKeyCode)KeyInterop.VirtualKeyFromKey(Key));
+                inputSimulator.Keyboard.KeyUp(VirtualKeyCode.SHIFT);
+            }
+            this.Register();
+
             foreach (Action a in this.Actions)
             {
                 a.Run();
@@ -165,7 +204,14 @@ namespace R3peat
 
         public override string ToString()
         {
-            return $"{ModifierKeys} + {Key}";
+            if (ModifierKeys == ModifierKeys.None)
+            {
+                return $"{Key}";
+            }
+            else
+            {
+                return $"{ModifierKeys} + {Key}";
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
