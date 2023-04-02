@@ -23,6 +23,19 @@ namespace R3peat
     {
         public MacroEditorModel MacroEditorModel;
         public ICoordinateConversion Converter = new WPFCoordinateConversion();
+
+        //stops alt from doing anything
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            if (e.Key == Key.LeftAlt || e.Key == Key.RightAlt)
+            {
+                e.Handled = true;
+            }
+            else
+            {
+                base.OnKeyDown(e);
+            }
+        }
         public MacroEditorWindow(Macro macro)
         {
             InitializeComponent();
