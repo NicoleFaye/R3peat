@@ -90,18 +90,22 @@ namespace R3peat
         }
         public void UpdateKeyCombo()
         {
-
             if (this.Key != Key.None && this.Key != Key.System)
             {
                 if (CurrentMacro.Hotkey.Key != this.Key || CurrentMacro.Hotkey.ModifierKeys != this.ModifierKeys)
                 {
+                    if (CurrentMacro.Hotkey.IsRegistered) {
+                        CurrentMacro.Hotkey.Unregister();
+                    }
                     CurrentMacro.Hotkey.Key = this.Key;
                     CurrentMacro.Hotkey.ModifierKeys= this.ModifierKeys;
                     if (CurrentMacro.Hotkey.Register())
                     {
-                        Console.WriteLine("Registered Hotkey: "+CurrentMacro.Hotkey.ToString());
+                        Console.WriteLine("Valid Hotkey: "+CurrentMacro.Hotkey.ToString());
+                        if (!CurrentMacro.Hotkey.Active) { CurrentMacro.Hotkey.Unregister(); }
                     }
-                    else { 
+                    else {
+                        Console.WriteLine("Invalid Hotkey");
                     }
                 }
             }
