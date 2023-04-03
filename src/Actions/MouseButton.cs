@@ -11,12 +11,14 @@ namespace R3peat
     {
         private InputSimulator _inputSimulator;
         public MouseButton MouseButton { get; set; }
+        public ClickType ClickAction { get; set; }
 
-        public MouseClick(InputSimulator inputSimulator, string name, MouseButton mouseButton)
+        public MouseClick(InputSimulator inputSimulator, string name, MouseButton mouseButton, ClickType clickAction)
         {
             _inputSimulator = inputSimulator;
             Name = name;
             MouseButton = mouseButton;
+            ClickAction = clickAction;
         }
 
         public override void Run()
@@ -24,10 +26,46 @@ namespace R3peat
             switch (MouseButton)
             {
                 case MouseButton.Left:
-                    _inputSimulator.Mouse.LeftButtonClick();
+                    PerformLeftClickAction();
                     break;
                 case MouseButton.Right:
+                    PerformRightClickAction();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void PerformLeftClickAction()
+        {
+            switch (ClickAction)
+            {
+                case ClickType.Click:
+                    _inputSimulator.Mouse.LeftButtonClick();
+                    break;
+                case ClickType.Down:
+                    _inputSimulator.Mouse.LeftButtonDown();
+                    break;
+                case ClickType.Up:
+                    _inputSimulator.Mouse.LeftButtonUp();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void PerformRightClickAction()
+        {
+            switch (ClickAction)
+            {
+                case ClickType.Click:
                     _inputSimulator.Mouse.RightButtonClick();
+                    break;
+                case ClickType.Down:
+                    _inputSimulator.Mouse.RightButtonDown();
+                    break;
+                case ClickType.Up:
+                    _inputSimulator.Mouse.RightButtonUp();
                     break;
                 default:
                     break;
@@ -40,5 +78,13 @@ namespace R3peat
         Left,
         Right,
     }
+
+    public enum ClickType
+    {
+        Click,
+        Down,
+        Up,
+    }
+
 
 }
