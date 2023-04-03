@@ -14,6 +14,7 @@ namespace R3peat
         ButtonPress,
         TextEntry,
         KeyCombination,
-
+        RunApplication,
+        
     }
 }
