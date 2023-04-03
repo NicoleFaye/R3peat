@@ -81,6 +81,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Compile Include="src\Actions\ButtonPress.cs" />
+    <Compile Include="src\Actions\KeyCombination.cs" />
     <Compile Include="src\Actions\MouseButton.cs" />
     <Compile Include="src\Actions\TextEntry.cs" />
     <Compile Include="src\Hotkey.cs" />
