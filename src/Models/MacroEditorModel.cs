@@ -90,13 +90,23 @@ namespace R3peat
         }
         public void UpdateKeyCombo()
         {
-
-            if (this.Key != Key.None && this.Key != Key.System && this.ModifierKeys != ModifierKeys.None)
+            if (this.Key != Key.None && this.Key != Key.System)
             {
-                if (!(CurrentMacro.Hotkey.KeyCombo.Key == this.Key && CurrentMacro.Hotkey.KeyCombo.Modifiers == this.ModifierKeys))
+                if (CurrentMacro.Hotkey.Key != this.Key || CurrentMacro.Hotkey.ModifierKeys != this.ModifierKeys)
                 {
-                    //TODO make sure its not registered and if it is, increment
-                    CurrentMacro.Hotkey.KeyCombo = new KeyGesture(this.Key, this.ModifierKeys);
+                    if (CurrentMacro.Hotkey.IsRegistered) {
+                        CurrentMacro.Hotkey.Unregister();
+                    }
+                    CurrentMacro.Hotkey.Key = this.Key;
+                    CurrentMacro.Hotkey.ModifierKeys= this.ModifierKeys;
+                    if (CurrentMacro.Hotkey.Register())
+                    {
+                        Console.WriteLine("Valid Hotkey: "+CurrentMacro.Hotkey.ToString());
+                        if (!CurrentMacro.Hotkey.Active) { CurrentMacro.Hotkey.Unregister(); }
+                    }
+                    else {
+                        Console.WriteLine("Invalid Hotkey");
+                    }
                 }
             }
         }
@@ -122,11 +132,11 @@ namespace R3peat
             {
                 case ActionType.Pause:
                     PauseBuilder.BuildPause();
-                    CurrentMacro.Actions.Add(PauseBuilder.GetPause());
+                    CurrentMacro.Hotkey.Actions.Add(PauseBuilder.GetPause());
                     break;
                 case ActionType.MouseMovement:
                     MouseMovementBuilder.BuildMouseMovement();
-                    CurrentMacro.Actions.Add(MouseMovementBuilder.GetMouseMovement());
+                    CurrentMacro.Hotkey.Actions.Add(MouseMovementBuilder.GetMouseMovement());
                     break;
                 default:
                     break;
@@ -134,7 +144,7 @@ namespace R3peat
         }
         public void DeleteAction(int index)
         {
-            CurrentMacro.Actions.RemoveAt(index);
+            CurrentMacro.Hotkey.Actions.RemoveAt(index);
         }
         public void DeleteMouseMovementStep(int index, ObservableCollection<MouseMovementStep> steps)
         {
@@ -142,13 +152,13 @@ namespace R3peat
         }
         public void ChangeActionOrderLater(int currentIndex)
         {
-            if (currentIndex + 1 >= CurrentMacro.Actions.Count)
+            if (currentIndex + 1 >= CurrentMacro.Hotkey.Actions.Count)
             {
                 return;
             }
-            Action swap = CurrentMacro.Actions[currentIndex + 1];
-            CurrentMacro.Actions[currentIndex + 1] = CurrentMacro.Actions[currentIndex];
-            CurrentMacro.Actions[currentIndex] = swap;
+            Action swap = CurrentMacro.Hotkey.Actions[currentIndex + 1];
+            CurrentMacro.Hotkey.Actions[currentIndex + 1] = CurrentMacro.Hotkey.Actions[currentIndex];
+            CurrentMacro.Hotkey.Actions[currentIndex] = swap;
         }
         public void ChangeActionOrderSooner(int currentIndex)
         {
@@ -156,9 +166,9 @@ namespace R3peat
             {
                 return;
             }
-            Action swap = CurrentMacro.Actions[currentIndex - 1];
-            CurrentMacro.Actions[currentIndex - 1] = CurrentMacro.Actions[currentIndex];
-            CurrentMacro.Actions[currentIndex] = swap;
+            Action swap = CurrentMacro.Hotkey.Actions[currentIndex - 1];
+            CurrentMacro.Hotkey.Actions[currentIndex - 1] = CurrentMacro.Hotkey.Actions[currentIndex];
+            CurrentMacro.Hotkey.Actions[currentIndex] = swap;
         }
         public void ChangeStepOrderSooner(int index, ObservableCollection<MouseMovementStep> steps)
         {

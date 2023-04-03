@@ -5,7 +5,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NHotkey.Wpf;
 using System.Windows;
 
 namespace R3peat
@@ -15,8 +14,7 @@ namespace R3peat
         private NameIncrementer MacroNameIncrementer = new NameIncrementer("Macro");
         private NameIncrementer HotkeyNameIncrementer = new NameIncrementer("Hotkey");
         public ObservableCollection<Macro> MacroList = new ObservableCollection<Macro>();
-        public HotkeyManager HotkeyManager;
-        public ObservableCollection<HotkeyObject> HotkeyObjects = new ObservableCollection<HotkeyObject>();
+        public ObservableCollection<Hotkey> Hotkeys = new ObservableCollection<Hotkey>();
 
         private int CurrentMacroID = 0;
         public event PropertyChangedEventHandler PropertyChanged;
@@ -29,8 +27,8 @@ namespace R3peat
         }
         public void NewMacro()
         {
-            HotkeyObject hotkeyObject = new HotkeyObject(HotkeyManager, HotkeyNameIncrementer.Next());
-            HotkeyObjects.Add(hotkeyObject);
+            Hotkey hotkeyObject = new Hotkey();
+            Hotkeys.Add(hotkeyObject);
             Macro newMacro = new Macro(MacroNameIncrementer.Next(), CurrentMacroID++.ToString(), hotkeyObject);
             MacroList.Add(newMacro);
         }

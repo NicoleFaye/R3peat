@@ -23,6 +23,19 @@ namespace R3peat
     {
         public MacroEditorModel MacroEditorModel;
         public ICoordinateConversion Converter = new WPFCoordinateConversion();
+
+        //stops alt from doing anything
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            if (e.Key == Key.LeftAlt || e.Key == Key.RightAlt)
+            {
+                e.Handled = true;
+            }
+            else
+            {
+                base.OnKeyDown(e);
+            }
+        }
         public MacroEditorWindow(Macro macro)
         {
             InitializeComponent();
@@ -31,7 +44,7 @@ namespace R3peat
             this.MacroEditorModel = new MacroEditorModel(macro);
             this.MacroNameTextBox.Text = macro.Name;
 
-            ActionList.ItemsSource = MacroEditorModel.CurrentMacro.Actions;
+            ActionList.ItemsSource = MacroEditorModel.CurrentMacro.Hotkey.Actions;
             NewActionTypeComboBox.ItemsSource = Enum.GetValues(typeof(ActionType));
 
             NumberBoxIntegerFormatter numberBoxIntegerFormatter = new NumberBoxIntegerFormatter();
@@ -83,14 +96,11 @@ namespace R3peat
                 else if (e.Key == Key.LeftAlt || e.Key == Key.RightAlt)
                 {
                     MacroEditorModel.ModifierKeys |= ModifierKeys.Alt;
-
                 }
-                /*
                 else if (e.Key == Key.LeftShift || e.Key == Key.RightShift)
                 {
                     MacroEditorModel.ModifierKeys |= ModifierKeys.Shift;
                 }
-                */
                 else
                 {
                     MacroEditorModel.Key = e.Key;
@@ -105,35 +115,21 @@ namespace R3peat
             {
                 if (e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl)
                 {
-                    if (MacroEditorModel.ModifierKeys.HasFlag(ModifierKeys.Shift)
-                        || MacroEditorModel.ModifierKeys.HasFlag(ModifierKeys.Alt))
-                    {
-                        MacroEditorModel.ModifierKeys &= ~ModifierKeys.Control;
-                    }
+                    MacroEditorModel.ModifierKeys &= ~ModifierKeys.Control;
                 }
                 else if (e.Key == Key.LeftAlt || e.Key == Key.RightAlt)
                 {
-
-                    if (MacroEditorModel.ModifierKeys.HasFlag(ModifierKeys.Shift)
-                        || MacroEditorModel.ModifierKeys.HasFlag(ModifierKeys.Control))
-                    {
-                        MacroEditorModel.ModifierKeys &= ~ModifierKeys.Alt;
-                    }
+                    MacroEditorModel.ModifierKeys &= ~ModifierKeys.Alt;
                 }
-                /*
                 else if (e.Key == Key.LeftShift || e.Key == Key.RightShift)
                 {
-                    if (MacroEditorModel.ModifierKeys.HasFlag(ModifierKeys.Alt)
-                        || MacroEditorModel.ModifierKeys.HasFlag(ModifierKeys.Control))
-                    {
-                        MacroEditorModel.ModifierKeys &= ~ModifierKeys.Shift;
-                    }
+                    MacroEditorModel.ModifierKeys &= ~ModifierKeys.Shift;
                 }
-                */
                 MacroEditorModel.UpdateKeyCombo();
             }
-
         }
+
+
         private void PauseDurationChanged(NumberBox sender, NumberBoxValueChangedEventArgs e)
         {
             NumberBox _sender = sender;
@@ -244,7 +240,7 @@ namespace R3peat
         private void ChangeActionOrderLater(object sender, RoutedEventArgs e)
         {
             int currentIndex = ActionList.SelectedIndex;
-            if (currentIndex >= MacroEditorModel.CurrentMacro.Actions.Count)
+            if (currentIndex >= MacroEditorModel.CurrentMacro.Hotkey.Actions.Count)
             {
                 return;
             }
