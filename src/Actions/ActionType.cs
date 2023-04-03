@@ -13,5 +13,7 @@ namespace R3peat
         MouseButton,
         ButtonPress,
         TextEntry,
+        KeyCombination,
+
     }
 }
