@@ -22,7 +22,8 @@ namespace R3peat
         protected MouseMovementBuilder MouseMovementBuilder;
         protected PauseBuilder PauseBuilder;
         private Visibility mouseMovementEditorGridVisibility;
-
+        public ButtonPressBuilder ButtonPressBuilder { get; private set; }
+        public MediaControlBuilder MediaControlBuilder { get; private set; }
         public Key Key { get; set; }
         public ModifierKeys ModifierKeys { get; set; }
         private DispatcherTimer _timer;
@@ -79,6 +80,8 @@ namespace R3peat
             this.CurrentMacro = macro;
             MouseMovementBuilder = new MouseMovementBuilder(input);
             PauseBuilder = new PauseBuilder();
+            ButtonPressBuilder = new ButtonPressBuilder(input);
+            MediaControlBuilder = new MediaControlBuilder(input);
             MouseMovementEditorGridVisibility = Visibility.Hidden;
             PauseEditorGridVisibility = Visibility.Hidden;
             PossibleModifiers = new Key[]
@@ -131,12 +134,16 @@ namespace R3peat
             switch (type)
             {
                 case ActionType.Pause:
-                    PauseBuilder.BuildPause();
-                    CurrentMacro.Hotkey.Actions.Add(PauseBuilder.GetPause());
+                    CurrentMacro.Hotkey.Actions.Add(PauseBuilder.Build());
                     break;
                 case ActionType.MouseMovement:
-                    MouseMovementBuilder.BuildMouseMovement();
-                    CurrentMacro.Hotkey.Actions.Add(MouseMovementBuilder.GetMouseMovement());
+                    CurrentMacro.Hotkey.Actions.Add(MouseMovementBuilder.Build());
+                    break;
+                case ActionType.ButtonPress:
+                    CurrentMacro.Hotkey.Actions.Add(ButtonPressBuilder.SetKey(Key.A).Build());
+                    break;
+                case ActionType.MediaControl:
+                    CurrentMacro.Hotkey.Actions.Add(MediaControlBuilder.SetControlType(MediaControlType.PlayPause).Build());
                     break;
                 default:
                     break;
