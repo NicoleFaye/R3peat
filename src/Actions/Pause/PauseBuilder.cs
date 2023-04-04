@@ -3,33 +3,45 @@ using WindowsInput;
 
 namespace R3peat
 {
-    public class PauseBuilder 
+    using System.Threading;
+
+    public class PauseBuilder
     {
         private int PauseDuration;
         private Pause pause;
         private string Name;
         private NameIncrementer NameIncrementer;
-        public void BuildPause() {
-            this.PauseDuration = 100;
-            this.Name = NameIncrementer.Next();
-            this.pause = new Pause(this.PauseDuration,this.Name);
-        }
-        public void BuildPause(string Name) {
-            this.Name = Name; 
-        }
-        public void SetName(string Name) {
-            this.Name = Name;
-        }
-        public void SetPauseDuration(int PauseDuration) {
-            this.PauseDuration = PauseDuration;
-        }
-        public Pause GetPause() {
-            return this.pause;
+
+        public PauseBuilder BuildPause(string name = null, int? pauseDuration = null)
+        {
+            Name = name ?? NameIncrementer.Next();
+            PauseDuration = pauseDuration ?? 100;
+            pause = new Pause(PauseDuration, Name);
+            return this;
         }
 
-        public PauseBuilder() {
-            this.NameIncrementer = new NameIncrementer("Pause");
+        public PauseBuilder SetName(string name)
+        {
+            Name = name;
+            return this;
         }
 
+        public PauseBuilder SetPauseDuration(int pauseDuration)
+        {
+            PauseDuration = pauseDuration;
+            return this;
+        }
+
+        public Pause GetPause()
+        {
+            return pause;
+        }
+
+        public PauseBuilder()
+        {
+            NameIncrementer = new NameIncrementer("Pause");
+        }
     }
+
+
 }
