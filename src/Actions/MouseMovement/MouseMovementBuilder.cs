@@ -5,35 +5,44 @@ using WindowsInput;
 
 namespace R3peat
 {
+
     public class MouseMovementBuilder
     {
         private ObservableCollection<MouseMovementStep> MouseMovementSteps;
         private InputSimulator Input;
         private string Name;
         private NameIncrementer NameIncrementer;
-        public void BuildMouseMovement() {
-            this.MouseMovementSteps = new ObservableCollection<MouseMovementStep>();
-            this.Name = NameIncrementer.Next();
-        }
-        public void BuildMouseMovement(string Name) {
-            this.MouseMovementSteps.Clear();
-            this.Name = Name; 
-        }
-        public void AddStep(MouseMovementStep newStep) { 
-            this.MouseMovementSteps.Add(newStep);
-        }
-        public void SetName(string Name) {
-            this.Name = Name;
-        }
-        public MouseMovement GetMouseMovement() {
-            return new MouseMovement(this.Input,this.Name,this.MouseMovementSteps);
+
+        public MouseMovement Build(string name = null)
+        {
+            MouseMovementSteps = new ObservableCollection<MouseMovementStep>();
+            Name = name ?? NameIncrementer.Next();
+            return new MouseMovement(this.Input, this.Name, this.MouseMovementSteps);
         }
 
-        public MouseMovementBuilder(InputSimulator newInput) {
-            this.Input = newInput;
-            this.MouseMovementSteps = new ObservableCollection<MouseMovementStep>();
-            this.NameIncrementer = new NameIncrementer("Mouse Movement");
+        public MouseMovementBuilder AddStep(MouseMovementStep newStep)
+        {
+            MouseMovementSteps.Add(newStep);
+            return this;
         }
 
+        public MouseMovementBuilder SetName(string name)
+        {
+            Name = name;
+            return this;
+        }
+
+        public MouseMovement GetMouseMovement()
+        {
+            return new MouseMovement(Input, Name, MouseMovementSteps);
+        }
+
+        public MouseMovementBuilder(InputSimulator newInput)
+        {
+            Input = newInput;
+            MouseMovementSteps = new ObservableCollection<MouseMovementStep>();
+            NameIncrementer = new NameIncrementer("Mouse Movement");
+        }
     }
+
 }
