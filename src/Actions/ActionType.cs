@@ -15,6 +15,7 @@ namespace R3peat
         TextEntry,
         KeyCombination,
         RunApplication,
+        MediaControl,
         
     }
 }
