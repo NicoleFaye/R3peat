@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WindowsInput;
+using WindowsInput.Native;
 
 namespace R3peat
 {
-    using WindowsInput;
-    using WindowsInput.Native;
 
     public class MediaControl : Action
     {
