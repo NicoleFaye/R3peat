@@ -84,7 +84,8 @@
     </Page>
     <Compile Include="src\Actions\ButtonPress\ButtonPress.cs" />
     <Compile Include="src\Actions\ButtonPress\ButtonPressBuilder.cs" />
-    <Compile Include="src\Actions\KeyCombination.cs" />
+    <Compile Include="src\Actions\KeyCombination\KeyCombination.cs" />
+    <Compile Include="src\Actions\KeyCombination\KeyCombinationBuilder.cs" />
     <Compile Include="src\Actions\MediaControl\MediaControl.cs" />
     <Compile Include="src\Actions\MediaControl\MediaControlBuilder.cs" />
     <Compile Include="src\Actions\MouseButton.cs" />
