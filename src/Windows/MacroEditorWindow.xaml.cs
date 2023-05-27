@@ -340,7 +340,8 @@ namespace R3peat
                 Keyboard.ClearFocus();
             }
         }
-
+        
+        //prevents arrowkeys from changing focus when setting hotkeys
         private void ChangeHotkeyButton_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Up || e.Key == Key.Down || e.Key == Key.Left || e.Key == Key.Right)
