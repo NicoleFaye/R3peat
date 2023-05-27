@@ -1,6 +1,7 @@
 ﻿using ModernWpf.Controls;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -128,6 +129,7 @@ namespace R3peat
                 MacroEditorModel.UpdateKeyCombo();
             }
         }
+
 
 
         private void PauseDurationChanged(NumberBox sender, NumberBoxValueChangedEventArgs e)
@@ -336,6 +338,15 @@ namespace R3peat
             if(e.Key== Key.Escape ||e.Key==Key.Return)
             {
                 Keyboard.ClearFocus();
+            }
+        }
+
+        private void ChangeHotkeyButton_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Up || e.Key == Key.Down || e.Key == Key.Left || e.Key == Key.Right)
+            {
+                e.Handled = true;
+                Grid_KeyDown(sender, e);
             }
         }
     }
