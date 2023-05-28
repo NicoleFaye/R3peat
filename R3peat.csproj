@@ -96,7 +96,6 @@
     <Compile Include="src\Hotkey.cs" />
     <Compile Include="src\Incrementers\HotkeyIncrementer.cs" />
     <Compile Include="src\HotkeyMode.cs" />
-    <Compile Include="src\HotkeyObject.cs" />
     <Compile Include="src\Macro.cs" />
     <Compile Include="src\Models\MainModel.cs" />
     <Compile Include="src\NameAndDescriptionProperty.cs" />
