@@ -36,7 +36,8 @@ namespace R3peat
                 {
                     this.Register();
                 }
-                else {
+                else
+                {
                     this.Unregister();
                 }
                 OnPropertyChanged();
@@ -160,7 +161,7 @@ namespace R3peat
 
         private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
-            
+
             const int WM_HOTKEY = 0x0312;
 
             if (msg == WM_HOTKEY && wParam.ToInt32() == _id && this.Active)
@@ -204,13 +205,45 @@ namespace R3peat
 
         public override string ToString()
         {
+            String keyString = Key.ToString();
+            if (keyString.Contains("Oem"))
+            {
+                if (keyString == "Oem1")
+                {
+                    keyString = "SemiColon";
+                }
+                else if (keyString == "Oem3")
+                {
+                    keyString = "Tilde";
+                }
+                else if (keyString == "Oem6")
+                {
+                    keyString = "ClosedBracket";
+                }
+                else
+                {
+                    keyString = keyString.Replace("Oem", "");
+                }
+            }
+            else if (keyString.StartsWith("D"))
+            {
+                if (keyString.Length > 1)
+                {
+                    if (Char.IsDigit(keyString[1]))
+                        keyString = keyString.Replace("D", "");
+                }
+            }
+            else if (keyString == "Next")
+            {
+                keyString = "PageDown";
+            }
             if (ModifierKeys == ModifierKeys.None)
             {
-                return $"{Key}";
+                return keyString;
             }
             else
             {
-                return $"{ModifierKeys} + {Key}";
+                return $"{ModifierKeys} + {keyString}";
             }
         }
 
