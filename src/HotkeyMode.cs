@@ -8,8 +8,8 @@ namespace R3peat
 {
     public enum HotkeyMode
     {
-        SingleExecution,
-        Toggle,
-        RepeatWhilePressed,
+        SingleExecution=0,
+        Toggle=1,
+        RepeatWhilePressed=2,
     }
 }

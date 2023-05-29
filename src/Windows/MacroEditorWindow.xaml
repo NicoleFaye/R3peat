@@ -35,7 +35,7 @@
         </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Margin="10" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Label Target="{Binding ElementName=ModeComboBox}" VerticalAlignment="Center" Content="Mode: " />
-                <ComboBox Name="ModeComboBox" Width="120" Height="31"/>
+                <ComboBox Name="ModeComboBox" Width="180" Height="31"/>
             </StackPanel>
         <Label Name="HotkeyDisplayLabel" Grid.Row="0" Grid.Column="1" Content="filler" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
         <Button PreviewKeyDown="ChangeHotkeyButton_PreviewKeyDown" Click="ToggleHotkeyUpdate" x:Name="ChangeHotkeyButton" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>

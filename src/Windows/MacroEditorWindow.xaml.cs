@@ -48,6 +48,10 @@ namespace R3peat
             ActionList.ItemsSource = MacroEditorModel.CurrentMacro.Hotkey.Actions;
             NewActionTypeComboBox.ItemsSource = Enum.GetValues(typeof(ActionType));
 
+
+            ModeComboBox.ItemsSource = Enum.GetValues(typeof(HotkeyMode));
+            ModeComboBox.SelectedItem = HotkeyMode.SingleExecution;
+
             NumberBoxIntegerFormatter numberBoxIntegerFormatter = new NumberBoxIntegerFormatter();
             PauseDurationNumberBox.NumberFormatter = numberBoxIntegerFormatter;
 
