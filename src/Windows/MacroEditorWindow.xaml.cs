@@ -50,7 +50,10 @@ namespace R3peat
 
 
             ModeComboBox.ItemsSource = Enum.GetValues(typeof(HotkeyMode));
-            ModeComboBox.SelectedItem = HotkeyMode.SingleExecution;
+            ModeComboBox.SelectedItem = MacroEditorModel.CurrentMacro.Hotkey.HotkeyMode;
+            Binding HotkeyModeBinding = new Binding("HotkeyMode");
+            HotkeyModeBinding.Source = MacroEditorModel.CurrentMacro.Hotkey;
+            ModeComboBox.SetBinding(ComboBox.SelectedItemProperty, HotkeyModeBinding);
 
             NumberBoxIntegerFormatter numberBoxIntegerFormatter = new NumberBoxIntegerFormatter();
             PauseDurationNumberBox.NumberFormatter = numberBoxIntegerFormatter;
