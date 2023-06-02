@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using WindowsInput.Native;
 using WindowsInput;
+using System.Threading;
 
 namespace R3peat
 {
@@ -23,6 +24,7 @@ namespace R3peat
         private bool _isRegistered;
         public ObservableCollection<Action> Actions { get; set; } = new ObservableCollection<Action>();
         private bool _active;
+        private Thread _loopThread;
         public bool Active
         {
             get
@@ -190,10 +192,33 @@ namespace R3peat
             }
             this.Register();
 
-            foreach (Action a in this.Actions)
+            executeRun();
+
+        }
+
+        //TODO
+        protected void executeRun() {
+            //need to determine how to handle
+
+
+            if (this.HotkeyMode == HotkeyMode.SingleExecution)
             {
-                a.Run();
+
+                //single execution default?
+                foreach (Action a in this.Actions)
+                {
+                    a.Run();
+                }
+
             }
+            else if (this.HotkeyMode == HotkeyMode.RepeatWhilePressed)
+            {
+
+            }
+            else if (this.HotkeyMode == HotkeyMode.Toggle) { }
+
+
+
         }
 
         [DllImport("user32.dll")]
