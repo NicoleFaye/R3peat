@@ -213,7 +213,7 @@ namespace R3peat
             }
             else if (this.HotkeyMode == HotkeyMode.RepeatWhilePressed)
             {
-
+                //something with a thread
             }
             else if (this.HotkeyMode == HotkeyMode.Toggle) { }
 
