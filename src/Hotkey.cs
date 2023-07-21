@@ -272,6 +272,21 @@ namespace R3peat
             }
         }
 
+        public void AddAction(Action action)
+        {
+            Actions.Add(action);
+        }
+
+        public void RemoveAction(Action action)
+        {
+            Actions.Remove(action);
+        }
+
+        public void ClearActions()
+        {
+            Actions.Clear();
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
